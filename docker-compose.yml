@@ -1,0 +1,12 @@
+services:
+  beeheard:
+    build: .
+    container_name: beeheard
+    ports:
+      - "8000:8000"
+    volumes:
+      # La base de données persiste hors du conteneur
+      - ./data:/app/data
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped

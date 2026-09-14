@@ -1,5 +1,8 @@
 """Point d'entrée de l'application BeeHeard."""
 
+from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
@@ -7,7 +10,15 @@ from app.base_donnees import creer_tables
 from app.config import NOM_APPLICATION, RACINE, VERSION
 from app.routes import routes_collecte, routes_export, routes_tableau_bord
 
+@asynccontextmanager
+async def cycle_de_vie(application: FastAPI) -> AsyncGenerator[None, None]:
+    """Assure l'existence des tables au démarrage de l'application."""
+    creer_tables()
+    yield
+
+
 app = FastAPI(
+    lifespan=cycle_de_vie,
     title=NOM_APPLICATION,
     version=VERSION,
     description=(
@@ -25,12 +36,6 @@ app.mount(
 app.include_router(routes_tableau_bord.routeur)
 app.include_router(routes_collecte.routeur)
 app.include_router(routes_export.routeur)
-
-
-@app.on_event("startup")
-def au_demarrage() -> None:
-    """Assure l'existence des tables au lancement."""
-    creer_tables()
 
 
 @app.get("/sante", tags=["technique"])
