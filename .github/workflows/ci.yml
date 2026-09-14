@@ -1,0 +1,34 @@
+name: Intégration continue
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  tests:
+    name: Tests et qualité
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+      - name: Installation de Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Installation des dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov ruff
+
+      - name: Vérification du formatage et du style
+        run: ruff check app tests
+        continue-on-error: true
+
+      - name: Exécution de la suite de tests
+        run: pytest tests -v --cov=app --cov-report=term-missing
