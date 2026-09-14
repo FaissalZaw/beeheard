@@ -101,9 +101,9 @@ comprend quatre categories et vingt-et-un types d'obstacles.
 | Categorie | Nombre de types |
 |---|---|
 | Obstacles economiques et tarifaires | 5 |
-| Obstacles organisationnels et politiques | 6 |
+| Obstacles organisationnels et politiques | 8 |
 | Obstacles informationnels | 5 |
-| Determinants sociaux et discrimination | 5 |
+| Determinants sociaux et discrimination | 7 |
 
 ## Protection des donnees
 

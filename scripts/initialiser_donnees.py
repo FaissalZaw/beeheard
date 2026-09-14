@@ -63,6 +63,8 @@ TYPES_OBSTACLES = [
     ("organisationnel", "refus_prise_en_charge", "Refus de prise en charge par une structure de soins"),
     ("organisationnel", "delai_administratif", "Délai de traitement d'une demande administrative"),
     ("organisationnel", "errance_diagnostique", "Délai avant l'établissement du diagnostic"),
+    ("organisationnel", "non_prise_en_compte_information", "Informations transmises par le patient non prises en compte"),
+    ("organisationnel", "medecine_defensive", "Décision guidée par la prudence institutionnelle plutôt que par le besoin"),
     # Informationnels
     ("informationnel", "information_indisponible", "Information non disponible sur les options de traitement"),
     ("informationnel", "procedure_opaque", "Procédure de demande peu claire ou non documentée"),
@@ -75,6 +77,8 @@ TYPES_OBSTACLES = [
     ("social", "barriere_linguistique", "Barrière linguistique dans la relation de soin"),
     ("social", "impact_professionnel", "Répercussions sur l'activité professionnelle"),
     ("social", "isolement", "Isolement social ou absence de soutien"),
+    ("social", "mise_en_doute_parole", "Parole ou symptômes mis en doute par les soignants"),
+    ("social", "absence_ecoute", "Absence d'écoute ou de prise au sérieux de la demande"),
 ]
 
 MALADIES = [
