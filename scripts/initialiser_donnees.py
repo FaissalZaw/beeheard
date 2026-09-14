@@ -56,6 +56,7 @@ TYPES_OBSTACLES = [
     ("economique", "absence_voie_tarifaire", "Absence de voie de remboursement établie"),
     ("economique", "cout_deplacement", "Coût des déplacements vers le centre de soins"),
     ("economique", "perte_revenu", "Perte de revenu liée aux absences professionnelles"),
+    ("economique", "refus_de_financer", "Refus de financer malgré une éligibilité reconnue"),
     # Organisationnels
     ("organisationnel", "delai_rendez_vous", "Délai d'obtention d'un rendez-vous spécialisé"),
     ("organisationnel", "absence_centre_reference", "Absence de centre de référence pour la pathologie"),
@@ -65,6 +66,8 @@ TYPES_OBSTACLES = [
     ("organisationnel", "errance_diagnostique", "Délai avant l'établissement du diagnostic"),
     ("organisationnel", "non_prise_en_compte_information", "Informations transmises par le patient non prises en compte"),
     ("organisationnel", "medecine_defensive", "Décision guidée par la prudence institutionnelle plutôt que par le besoin"),
+    ("organisationnel", "deni_institutionnel", "Déni du problème par l'institution sollicitée"),
+    ("organisationnel", "blocage_politique", "Blocage lié à un désaccord entre institutions ou acteurs"),
     # Informationnels
     ("informationnel", "information_indisponible", "Information non disponible sur les options de traitement"),
     ("informationnel", "procedure_opaque", "Procédure de demande peu claire ou non documentée"),
@@ -79,6 +82,7 @@ TYPES_OBSTACLES = [
     ("social", "isolement", "Isolement social ou absence de soutien"),
     ("social", "mise_en_doute_parole", "Parole ou symptômes mis en doute par les soignants"),
     ("social", "absence_ecoute", "Absence d'écoute ou de prise au sérieux de la demande"),
+    ("social", "mauvaise_foi", "Réponse de mauvaise foi ou argument sans fondement opposé à la demande"),
 ]
 
 MALADIES = [
