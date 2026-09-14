@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block titre %}Déposer un témoignage – BeeHeard{% endblock %}
+
+{% block contenu %}
+<h1>Déposer un témoignage</h1>
+<p class="intro">
+  Ce formulaire permet de documenter les obstacles rencontrés dans l'accès
+  à un traitement. Votre témoignage sera anonymisé selon le niveau que vous
+  choisissez et ne sera publié qu'après validation.
+</p>
+
+{% if erreur %}
+<div class="alerte">{{ erreur }}</div>
+{% endif %}
+
+<form method="post" action="/temoignage">
+
+  <fieldset>
+    <legend>Qui témoigne</legend>
+
+    <label for="role">En quelle qualité témoignez-vous ?</label>
+    <select name="role" id="role" required>
+      {% for role in roles %}
+      <option value="{{ role.value }}">{{ role.value | capitalize }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="region">Canton ou région (facultatif)</label>
+    <input type="text" name="region" id="region" placeholder="Genève">
+
+    <label for="tranche_age">Tranche d'âge (facultatif)</label>
+    <select name="tranche_age" id="tranche_age">
+      <option value="">Non renseigné</option>
+      <option value="moins de 18">Moins de 18 ans</option>
+      <option value="18-29">18 à 29 ans</option>
+      <option value="30-39">30 à 39 ans</option>
+      <option value="40-49">40 à 49 ans</option>
+      <option value="50-59">50 à 59 ans</option>
+      <option value="60 et plus">60 ans et plus</option>
+    </select>
+  </fieldset>
+
+  <fieldset>
+    <legend>Le témoignage</legend>
+
+    <label for="maladie_id">Pathologie concernée</label>
+    <select name="maladie_id" id="maladie_id" required>
+      {% for maladie in maladies %}
+      <option value="{{ maladie.id }}">{{ maladie.nom }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="titre">Titre</label>
+    <input type="text" name="titre" id="titre" required minlength="5"
+           placeholder="Résumez votre situation en une phrase">
+
+    <label for="recit">Votre récit</label>
+    <textarea name="recit" id="recit" rows="8" required minlength="20"
+              placeholder="Décrivez librement ce que vous avez vécu."></textarea>
+
+    <label for="date_evenement">Date de l'événement (facultatif)</label>
+    <input type="date" name="date_evenement" id="date_evenement">
+  </fieldset>
+
+  <fieldset>
+    <legend>Obstacles rencontrés</legend>
+    <p class="aide">
+      Sélectionnez les obstacles qui correspondent à votre situation.
+      Cette qualification permet de rendre les témoignages comparables.
+    </p>
+
+    {% for categorie in categories %}
+    <div class="categorie">
+      <h3>{{ categorie.libelle }}</h3>
+      {% for type in categorie.types %}
+      <label class="case">
+        <input type="checkbox" name="obstacles" value="{{ type.id }}">
+        {{ type.libelle }}
+      </label>
+      {% endfor %}
+    </div>
+    {% endfor %}
+
+    <label for="severite">Gravité ressentie (1 à 5)</label>
+    <input type="range" name="severite" id="severite" min="1" max="5" value="3">
+
+    <label for="duree_jours">Durée du blocage en jours (facultatif)</label>
+    <input type="number" name="duree_jours" id="duree_jours" min="0"
+           placeholder="Par exemple 240">
+  </fieldset>
+
+  <fieldset>
+    <legend>Consentement et anonymisation</legend>
+
+    <label for="niveau_anonymisation">Niveau d'anonymisation souhaité</label>
+    <select name="niveau_anonymisation" id="niveau_anonymisation">
+      <option value="complet">
+        Complet : aucune donnée de contexte n'est conservée
+      </option>
+      <option value="partiel">
+        Partiel : seule la région est conservée
+      </option>
+      <option value="identifie">
+        Étendu : région et tranche d'âge sont conservées
+      </option>
+    </select>
+
+    <label class="case">
+      <input type="checkbox" name="autorise_publication" value="true">
+      J'autorise la publication de mon témoignage sous forme anonymisée
+    </label>
+
+    <label class="case">
+      <input type="checkbox" name="autorise_plaidoyer" value="true">
+      J'autorise son utilisation dans des supports de plaidoyer
+    </label>
+
+    <label class="case obligatoire">
+      <input type="checkbox" name="consentement_donne" value="true" required>
+      Je consens au traitement des informations que je transmets, conformément
+      à la Loi fédérale sur la protection des données
+    </label>
+  </fieldset>
+
+  <button type="submit">Envoyer le témoignage</button>
+</form>
+{% endblock %}

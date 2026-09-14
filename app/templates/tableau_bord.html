@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block titre %}Tableau de bord – BeeHeard{% endblock %}
+
+{% block contenu %}
+<h1>Obstacles d'accès aux traitements</h1>
+<p class="intro">
+  Indicateurs agrégés issus des témoignages validés.
+</p>
+
+<div class="indicateurs">
+  <div class="indicateur">
+    <span class="valeur">{{ synthese.nombre_temoignages }}</span>
+    <span class="libelle">témoignages</span>
+  </div>
+  <div class="indicateur">
+    <span class="valeur">{{ synthese.nombre_obstacles }}</span>
+    <span class="libelle">obstacles signalés</span>
+  </div>
+  <div class="indicateur">
+    <span class="valeur">
+      {% if synthese.duree_moyenne_blocage %}
+        {{ synthese.duree_moyenne_blocage | round | int }}
+      {% else %}
+        –
+      {% endif %}
+    </span>
+    <span class="libelle">jours de blocage en moyenne</span>
+  </div>
+</div>
+
+{% if synthese.nombre_temoignages == 0 %}
+<div class="vide">
+  <p>Aucun témoignage validé pour le moment.</p>
+  <p><a href="/temoignage" class="bouton">Déposer le premier témoignage</a></p>
+</div>
+{% else %}
+
+<section>
+  <h2>Répartition par catégorie d'obstacle</h2>
+  {% for ligne in synthese.par_categorie %}
+  <div class="barre-ligne">
+    <div class="barre-libelle">{{ ligne.libelle }}</div>
+    <div class="barre-piste">
+      <div class="barre-remplissage" style="width: {{ ligne.pourcentage }}%"></div>
+    </div>
+    <div class="barre-valeur">{{ ligne.effectif }} ({{ ligne.pourcentage }} %)</div>
+  </div>
+  {% endfor %}
+</section>
+
+<section>
+  <h2>Obstacles les plus fréquemment signalés</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Obstacle</th>
+        <th>Catégorie</th>
+        <th>Signalements</th>
+        <th>Gravité moyenne</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for obstacle in synthese.obstacles_frequents %}
+      <tr>
+        <td>{{ obstacle.libelle }}</td>
+        <td class="discret">{{ obstacle.categorie }}</td>
+        <td>{{ obstacle.effectif }}</td>
+        <td>{{ obstacle.severite_moyenne }} / 5</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Répartition par profil de contributeur</h2>
+  <table>
+    <thead>
+      <tr><th>Qualité</th><th>Témoignages</th></tr>
+    </thead>
+    <tbody>
+      {% for ligne in synthese.par_role %}
+      <tr>
+        <td>{{ ligne.role | capitalize }}</td>
+        <td>{{ ligne.effectif }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+{% endif %}
+{% endblock %}

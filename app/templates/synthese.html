@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block titre %}Fiche de synthèse – BeeHeard{% endblock %}
+
+{% block contenu %}
+<div class="fiche">
+  <div class="fiche-entete">
+    <h1>Obstacles d'accès aux traitements</h1>
+    <p class="discret">Fiche de synthèse générée le {{ date_generation }}</p>
+  </div>
+
+  <section>
+    <h2>Ce que montrent les données</h2>
+    <p>
+      Sur {{ synthese.nombre_temoignages }} témoignages recueillis,
+      {{ synthese.nombre_obstacles }} obstacles ont été signalés.
+      {% if synthese.duree_moyenne_blocage %}
+      La durée moyenne des blocages renseignés s'établit à
+      {{ synthese.duree_moyenne_blocage | round | int }} jours.
+      {% endif %}
+    </p>
+
+    <ul class="constats">
+      {% for ligne in synthese.par_categorie %}
+      <li>
+        <strong>{{ ligne.pourcentage }} %</strong> des signalements relèvent
+        des {{ ligne.libelle | lower }}.
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Obstacles les plus signalés</h2>
+    <ol class="classement">
+      {% for obstacle in synthese.obstacles_frequents[:5] %}
+      <li>
+        {{ obstacle.libelle }}
+        <span class="discret">
+          ({{ obstacle.effectif }} signalements, gravité moyenne
+          {{ obstacle.severite_moyenne }} sur 5)
+        </span>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  {% if illustrations %}
+  <section>
+    <h2>Témoignages illustratifs</h2>
+    {% for temoignage in illustrations %}
+    <blockquote>
+      <p class="citation-titre">{{ temoignage.titre }}</p>
+      <p>{{ temoignage.recit }}</p>
+      <footer class="discret">
+        {{ temoignage.contributeur.pseudonyme }},
+        {{ temoignage.contributeur.role }}
+      </footer>
+    </blockquote>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <div class="fiche-pied discret">
+    <p>
+      Document produit par BeeHeard à partir de témoignages recueillis avec
+      consentement explicite et anonymisés.
+    </p>
+  </div>
+</div>
+
+<p class="actions-impression">
+  <button onclick="window.print()" class="bouton">Imprimer ou exporter en PDF</button>
+</p>
+{% endblock %}
