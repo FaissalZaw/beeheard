@@ -808,3 +808,12 @@ section p {
   .nav-principale { margin-left: 0; width: 100%; order: 3; }
   .nav-principale a:first-child { margin-left: 0; }
 }
+
+
+.note-langue {
+  padding: 11px 16px;
+  background: var(--avertissement);
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 26px;
+}

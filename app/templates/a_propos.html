@@ -1,7 +1,233 @@
 {% extends "base.html" %}
-{% block titre %}À propos – BeeHeard{% endblock %}
+{% block titre %}{{ t("nav_a_propos", langue) }} - BeeHeard{% endblock %}
 
 {% block contenu %}
+{% if langue == "en" %}
+<h1>About BeeHeard</h1>
+
+<section>
+  <h2>The observation</h2>
+  <p>
+    Approval of a treatment by a regulatory authority does not guarantee that
+    it reaches patients. Between authorisation and effective access lie
+    economic, organisational, informational and social barriers that are
+    rarely documented systematically.
+  </p>
+  <p>
+    The scientific literature shows that this lack of documentation is not
+    merely a consequence of the problem: it is one of its causes. Without data
+    on actual needs, the actors who could act refrain from doing so, and
+    suitable funding mechanisms become inapplicable.
+  </p>
+</section>
+
+<section>
+  <h2>The approach</h2>
+  <p>
+    BeeHeard collects the accounts of those who face these barriers, links
+    them to an established classification, and produces aggregated indicators.
+    The narrative is kept in full: the structured classification is added to
+    the account without replacing it.
+  </p>
+</section>
+
+<section>
+  <h2>The barrier classification</h2>
+  <p>
+    The barrier types offered for selection are derived from the scientific
+    literature on access to care, and were reviewed with a domain expert. They
+    fall into four categories.
+  </p>
+  {% for categorie in categories %}
+  <div class="bloc-categorie">
+    <h3>{{ categorie.libelle_dans(langue_courante) }}</h3>
+    {% if categorie.description_dans(langue_courante) %}
+    <p class="discret">{{ categorie.description_dans(langue_courante) }}</p>
+    {% endif %}
+    <ul class="liste-types">
+      {% for type in categorie.types %}
+      <li>{{ type.libelle_dans(langue_courante) }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+
+<section>
+  <h2>Who can contribute</h2>
+  <p>
+    Anyone facing a barrier to access: patients themselves, their relatives,
+    healthcare professionals supporting patients, and association
+    representatives.
+  </p>
+</section>
+
+<section>
+  <h2>Project framework</h2>
+  <p>
+    BeeHeard is a prototype developed as part of a Bachelor's thesis in
+    Business Information Technology at the Geneva School of Business
+    Administration. It forms the technical component of a broader effort to
+    accelerate equitable access to treatment in rare and neglected diseases.
+  </p>
+  <p>
+    The source code is publicly available at
+    <a href="https://github.com/FaissalZaw/beeheard">github.com/FaissalZaw/beeheard</a>.
+  </p>
+</section>
+
+{% elif langue == "de" %}
+<h1>Über BeeHeard</h1>
+
+<section>
+  <h2>Die Ausgangslage</h2>
+  <p>
+    Die Zulassung einer Behandlung durch eine Aufsichtsbehörde garantiert
+    nicht, dass sie die Patientinnen und Patienten erreicht. Zwischen Zulassung
+    und tatsächlichem Zugang liegen wirtschaftliche, organisatorische,
+    informationsbezogene und soziale Hindernisse, die selten systematisch
+    dokumentiert werden.
+  </p>
+  <p>
+    Die Fachliteratur zeigt, dass diese fehlende Dokumentation nicht nur eine
+    Folge des Problems ist, sondern eine seiner Ursachen. Ohne Daten zum
+    tatsächlichen Bedarf verzichten handlungsfähige Akteure auf ein Eingreifen,
+    und geeignete Finanzierungsmechanismen werden unanwendbar.
+  </p>
+</section>
+
+<section>
+  <h2>Das Vorgehen</h2>
+  <p>
+    BeeHeard sammelt die Berichte jener, die solche Hindernisse erleben,
+    verknüpft sie mit einer etablierten Systematik und erzeugt daraus
+    aggregierte Indikatoren. Der Bericht bleibt vollständig erhalten: Die
+    strukturierte Einordnung ergänzt ihn, ersetzt ihn aber nicht.
+  </p>
+</section>
+
+<section>
+  <h2>Die Systematik der Hindernisse</h2>
+  <p>
+    Die zur Auswahl stehenden Hindernistypen sind aus der Fachliteratur zum
+    Zugang zur Gesundheitsversorgung abgeleitet und wurden mit einer
+    Fachperson überprüft. Sie gliedern sich in vier Kategorien.
+  </p>
+  {% for categorie in categories %}
+  <div class="bloc-categorie">
+    <h3>{{ categorie.libelle_dans(langue_courante) }}</h3>
+    {% if categorie.description_dans(langue_courante) %}
+    <p class="discret">{{ categorie.description_dans(langue_courante) }}</p>
+    {% endif %}
+    <ul class="liste-types">
+      {% for type in categorie.types %}
+      <li>{{ type.libelle_dans(langue_courante) }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+
+<section>
+  <h2>Wer berichten kann</h2>
+  <p>
+    Alle, die mit einem Zugangshindernis konfrontiert sind: Patientinnen und
+    Patienten selbst, ihre Angehörigen, Fachpersonen im Gesundheitswesen, die
+    Betroffene begleiten, sowie Vertretungen von Vereinen.
+  </p>
+</section>
+
+<section>
+  <h2>Rahmen des Projekts</h2>
+  <p>
+    BeeHeard ist ein Prototyp, der im Rahmen einer Bachelorarbeit in
+    Wirtschaftsinformatik an der Haute École de Gestion Genf entwickelt wurde.
+    Er bildet den informationstechnischen Teil eines umfassenderen Vorhabens,
+    den gerechten Zugang zu Behandlungen bei seltenen und vernachlässigten
+    Erkrankungen zu beschleunigen.
+  </p>
+  <p>
+    Der Quellcode ist öffentlich verfügbar unter
+    <a href="https://github.com/FaissalZaw/beeheard">github.com/FaissalZaw/beeheard</a>.
+  </p>
+</section>
+
+{% elif langue == "it" %}
+<h1>Informazioni su BeeHeard</h1>
+
+<section>
+  <h2>La constatazione</h2>
+  <p>
+    L'approvazione di un trattamento da parte di un'autorità di
+    regolamentazione non garantisce che raggiunga i pazienti. Tra
+    l'autorizzazione e l'accesso effettivo si interpongono ostacoli economici,
+    organizzativi, informativi e sociali, raramente documentati in modo
+    sistematico.
+  </p>
+  <p>
+    La letteratura scientifica mostra che questa assenza di documentazione non
+    è soltanto una conseguenza del problema: ne è una causa. In mancanza di
+    dati sui bisogni reali, gli attori in grado di agire rinunciano, e i
+    meccanismi di finanziamento adeguati diventano inapplicabili.
+  </p>
+</section>
+
+<section>
+  <h2>L'approccio</h2>
+  <p>
+    BeeHeard raccoglie le testimonianze di chi subisce questi ostacoli, le
+    collega a una nomenclatura consolidata e ne produce indicatori aggregati.
+    Il racconto è conservato integralmente: la qualificazione strutturata si
+    aggiunge alla testimonianza senza sostituirla.
+  </p>
+</section>
+
+<section>
+  <h2>La nomenclatura degli ostacoli</h2>
+  <p>
+    I tipi di ostacoli proposti per la selezione derivano dalla letteratura
+    scientifica sull'accesso alle cure e sono stati rivisti con un esperto del
+    settore. Si articolano in quattro categorie.
+  </p>
+  {% for categorie in categories %}
+  <div class="bloc-categorie">
+    <h3>{{ categorie.libelle_dans(langue_courante) }}</h3>
+    {% if categorie.description_dans(langue_courante) %}
+    <p class="discret">{{ categorie.description_dans(langue_courante) }}</p>
+    {% endif %}
+    <ul class="liste-types">
+      {% for type in categorie.types %}
+      <li>{{ type.libelle_dans(langue_courante) }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+
+<section>
+  <h2>Chi può testimoniare</h2>
+  <p>
+    Chiunque si trovi di fronte a un ostacolo di accesso: i pazienti stessi, i
+    loro familiari, i professionisti sanitari che accompagnano i pazienti e i
+    rappresentanti di associazioni.
+  </p>
+</section>
+
+<section>
+  <h2>Il quadro del progetto</h2>
+  <p>
+    BeeHeard è un prototipo sviluppato nell'ambito di un lavoro di Bachelor in
+    Informatica gestionale presso la Haute École de Gestion di Ginevra.
+    Costituisce la componente informatica di un'iniziativa più ampia volta ad
+    accelerare l'accesso equo alle cure nelle malattie rare e neglette.
+  </p>
+  <p>
+    Il codice sorgente è disponibile pubblicamente all'indirizzo
+    <a href="https://github.com/FaissalZaw/beeheard">github.com/FaissalZaw/beeheard</a>.
+  </p>
+</section>
+
+{% else %}
 <h1>À propos de BeeHeard</h1>
 
 <section>
@@ -38,16 +264,15 @@
     scientifique sur l'accès aux soins, et ont été revus avec un expert du
     domaine. Ils se répartissent en quatre catégories.
   </p>
-
   {% for categorie in categories %}
   <div class="bloc-categorie">
-    <h3>{{ categorie.libelle }}</h3>
-    {% if categorie.description %}
-    <p class="discret">{{ categorie.description }}</p>
+    <h3>{{ categorie.libelle_dans(langue_courante) }}</h3>
+    {% if categorie.description_dans(langue_courante) %}
+    <p class="discret">{{ categorie.description_dans(langue_courante) }}</p>
     {% endif %}
     <ul class="liste-types">
       {% for type in categorie.types %}
-      <li>{{ type.libelle }}</li>
+      <li>{{ type.libelle_dans(langue_courante) }}</li>
       {% endfor %}
     </ul>
   </div>
@@ -77,4 +302,5 @@
     <a href="https://github.com/FaissalZaw/beeheard">github.com/FaissalZaw/beeheard</a>.
   </p>
 </section>
+{% endif %}
 {% endblock %}

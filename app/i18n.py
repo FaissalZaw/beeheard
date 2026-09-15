@@ -512,6 +512,143 @@ TRADUCTIONS.update({
     },
 })
 
+TRADUCTIONS.update({
+    # Fiche de synthèse
+    "synth_titre": {
+        "fr": "Obstacles d'accès aux traitements",
+        "en": "Barriers to treatment access",
+        "de": "Hindernisse beim Zugang zu Behandlungen",
+        "it": "Ostacoli all'accesso alle cure",
+    },
+    "synth_generee": {
+        "fr": "Fiche de synthèse générée le",
+        "en": "Summary sheet generated on",
+        "de": "Übersichtsblatt erstellt am",
+        "it": "Scheda di sintesi generata il",
+    },
+    "synth_ce_que_montrent": {
+        "fr": "Ce que montrent les données",
+        "en": "What the data shows",
+        "de": "Was die Daten zeigen",
+        "it": "Cosa mostrano i dati",
+    },
+    "synth_sur": {
+        "fr": "Sur", "en": "Out of", "de": "Von", "it": "Su",
+    },
+    "synth_recueillis": {
+        "fr": "témoignages recueillis,",
+        "en": "accounts collected,",
+        "de": "erfassten Berichten wurden",
+        "it": "testimonianze raccolte,",
+    },
+    "synth_ont_ete_signales": {
+        "fr": "obstacles ont été signalés.",
+        "en": "barriers were reported.",
+        "de": "Hindernisse gemeldet.",
+        "it": "ostacoli sono stati segnalati.",
+    },
+    "synth_duree_moyenne": {
+        "fr": "La durée moyenne des blocages renseignés s'établit à",
+        "en": "The average duration of reported blockages is",
+        "de": "Die durchschnittliche Dauer der gemeldeten Blockaden beträgt",
+        "it": "La durata media dei blocchi segnalati è di",
+    },
+    "synth_jours": {
+        "fr": "jours.", "en": "days.", "de": "Tage.", "it": "giorni.",
+    },
+    "synth_des_signalements": {
+        "fr": "des signalements relèvent des",
+        "en": "of reports fall under",
+        "de": "der Meldungen betreffen",
+        "it": "delle segnalazioni riguardano",
+    },
+    "synth_plus_signales": {
+        "fr": "Obstacles les plus signalés",
+        "en": "Most reported barriers",
+        "de": "Am häufigsten gemeldete Hindernisse",
+        "it": "Ostacoli più segnalati",
+    },
+    "synth_signalements": {
+        "fr": "signalements, gravité moyenne",
+        "en": "reports, average severity",
+        "de": "Meldungen, durchschnittlicher Schweregrad",
+        "it": "segnalazioni, gravità media",
+    },
+    "synth_sur_cinq": {
+        "fr": "sur 5", "en": "out of 5", "de": "von 5", "it": "su 5",
+    },
+    "synth_illustratifs": {
+        "fr": "Témoignages illustratifs",
+        "en": "Illustrative accounts",
+        "de": "Beispielhafte Berichte",
+        "it": "Testimonianze illustrative",
+    },
+    "synth_pied": {
+        "fr": "Document produit par BeeHeard à partir de témoignages recueillis "
+              "avec consentement explicite et anonymisés.",
+        "en": "Document produced by BeeHeard from accounts collected with "
+              "explicit consent and anonymised.",
+        "de": "Dokument von BeeHeard aus Berichten erstellt, die mit "
+              "ausdrücklicher Zustimmung erfasst und anonymisiert wurden.",
+        "it": "Documento prodotto da BeeHeard a partire da testimonianze "
+              "raccolte con consenso esplicito e anonimizzate.",
+    },
+    "synth_imprimer": {
+        "fr": "Imprimer ou exporter en PDF",
+        "en": "Print or export as PDF",
+        "de": "Drucken oder als PDF exportieren",
+        "it": "Stampare o esportare in PDF",
+    },
+
+    # Confirmation
+    "conf_titre": {
+        "fr": "Votre témoignage a été enregistré",
+        "en": "Your account has been recorded",
+        "de": "Ihr Bericht wurde erfasst",
+        "it": "La tua testimonianza è stata registrata",
+    },
+    "conf_reference": {
+        "fr": "Référence", "en": "Reference",
+        "de": "Referenz", "it": "Riferimento",
+    },
+    "conf_texte": {
+        "fr": "Il sera examiné avant d'être intégré aux données agrégées. Les "
+              "informations que vous avez transmises ont été anonymisées selon "
+              "le niveau que vous avez choisi, et votre consentement a été "
+              "enregistré avec sa date.",
+        "en": "It will be reviewed before being included in the aggregated "
+              "data. The information you provided has been anonymised "
+              "according to the level you chose, and your consent has been "
+              "recorded with its date.",
+        "de": "Er wird geprüft, bevor er in die aggregierten Daten aufgenommen "
+              "wird. Ihre Angaben wurden gemäss der gewählten Stufe "
+              "anonymisiert, und Ihre Zustimmung wurde mit Datum erfasst.",
+        "it": "Sarà esaminata prima di essere integrata nei dati aggregati. Le "
+              "informazioni trasmesse sono state anonimizzate secondo il "
+              "livello scelto, e il tuo consenso è stato registrato con la "
+              "relativa data.",
+    },
+    "conf_aucune_donnee": {
+        "fr": "Aucune donnée permettant de vous identifier n'a été conservée.",
+        "en": "No data allowing you to be identified has been kept.",
+        "de": "Es wurden keine Daten gespeichert, die Sie identifizieren "
+              "könnten.",
+        "it": "Nessun dato che permetta di identificarti è stato conservato.",
+    },
+    "conf_retour_accueil": {
+        "fr": "Retour à l'accueil", "en": "Back to home",
+        "de": "Zurück zur Startseite", "it": "Torna alla pagina iniziale",
+    },
+
+    # Avertissement de langue
+    "page_francais_uniquement": {
+        "fr": "",
+        "en": "This page is currently available in French only.",
+        "de": "Diese Seite ist derzeit nur auf Französisch verfügbar.",
+        "it": "Questa pagina è attualmente disponibile solo in francese.",
+    },
+})
+
 
 def traduire(cle: str, langue: str = "fr") -> str:
     """Retourne la chaîne traduite, avec repli sur le français."""

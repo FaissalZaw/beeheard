@@ -1,7 +1,167 @@
 {% extends "base.html" %}
-{% block titre %}Mentions légales – BeeHeard{% endblock %}
+{% block titre %}{{ t("pied_mentions", langue) }} - BeeHeard{% endblock %}
 
 {% block contenu %}
+{% if langue == "en" %}
+<h1>Legal notice</h1>
+
+<section>
+  <h2>Nature of the service</h2>
+  <p>
+    BeeHeard is a prototype developed as part of a Bachelor's thesis in
+    Business Information Technology at the Geneva School of Business
+    Administration, HES-SO Geneva.
+  </p>
+  <p>
+    It is neither an operational service, nor a medical device, nor an official
+    registry. The information it presents does not constitute established
+    epidemiological data.
+  </p>
+</section>
+
+<section>
+  <h2>Responsible party</h2>
+  <p>
+    Faissal Zaw, student in Business Information Technology<br>
+    Geneva School of Business Administration<br>
+    Academic supervision: David-Zacharie Issom
+  </p>
+</section>
+
+<section>
+  <h2>Source code</h2>
+  <p>
+    The code is published at
+    <a href="https://github.com/FaissalZaw/beeheard">github.com/FaissalZaw/beeheard</a>
+    and relies exclusively on free or open-source components.
+  </p>
+</section>
+
+<section>
+  <h2>Limitation of liability</h2>
+  <p>
+    This prototype is provided for demonstration purposes. No guarantee is
+    given as to service availability, the accuracy of the data presented, or
+    the retention of submitted information.
+  </p>
+</section>
+
+<section>
+  <h2>Demonstration content</h2>
+  <p>
+    The accounts currently displayed are fictitious. They were constructed from
+    barriers documented in the scientific literature and correspond to no real
+    person.
+  </p>
+</section>
+
+{% elif langue == "de" %}
+<h1>Impressum</h1>
+
+<section>
+  <h2>Art des Dienstes</h2>
+  <p>
+    BeeHeard ist ein Prototyp, der im Rahmen einer Bachelorarbeit in
+    Wirtschaftsinformatik an der Haute École de Gestion Genf, HES-SO Genf,
+    entwickelt wurde.
+  </p>
+  <p>
+    Es handelt sich weder um einen betriebenen Dienst noch um ein
+    Medizinprodukt noch um ein offizielles Register. Die dargestellten Angaben
+    haben nicht den Status gesicherter epidemiologischer Daten.
+  </p>
+</section>
+
+<section>
+  <h2>Verantwortlich</h2>
+  <p>
+    Faissal Zaw, Student der Wirtschaftsinformatik<br>
+    Haute École de Gestion Genf<br>
+    Akademische Betreuung: David-Zacharie Issom
+  </p>
+</section>
+
+<section>
+  <h2>Quellcode</h2>
+  <p>
+    Der Code ist veröffentlicht unter
+    <a href="https://github.com/FaissalZaw/beeheard">github.com/FaissalZaw/beeheard</a>
+    und beruht ausschliesslich auf freien oder quelloffenen Komponenten.
+  </p>
+</section>
+
+<section>
+  <h2>Haftungsbeschränkung</h2>
+  <p>
+    Dieser Prototyp wird zu Demonstrationszwecken bereitgestellt. Es wird keine
+    Gewähr für die Verfügbarkeit des Dienstes, die Richtigkeit der dargestellten
+    Daten oder die Aufbewahrung der eingegebenen Informationen übernommen.
+  </p>
+</section>
+
+<section>
+  <h2>Demonstrationsinhalte</h2>
+  <p>
+    Die derzeit angezeigten Berichte sind fiktiv. Sie wurden aus in der
+    Fachliteratur dokumentierten Hindernissen konstruiert und entsprechen
+    keiner realen Person.
+  </p>
+</section>
+
+{% elif langue == "it" %}
+<h1>Note legali</h1>
+
+<section>
+  <h2>Natura del servizio</h2>
+  <p>
+    BeeHeard è un prototipo sviluppato nell'ambito di un lavoro di Bachelor in
+    Informatica gestionale presso la Haute École de Gestion di Ginevra, HES-SO
+    Ginevra.
+  </p>
+  <p>
+    Non si tratta né di un servizio in esercizio, né di un dispositivo medico,
+    né di un registro ufficiale. Le informazioni presentate non hanno valore di
+    dato epidemiologico consolidato.
+  </p>
+</section>
+
+<section>
+  <h2>Responsabile</h2>
+  <p>
+    Faissal Zaw, studente in Informatica gestionale<br>
+    Haute École de Gestion di Ginevra<br>
+    Supervisione accademica: David-Zacharie Issom
+  </p>
+</section>
+
+<section>
+  <h2>Codice sorgente</h2>
+  <p>
+    Il codice è pubblicato all'indirizzo
+    <a href="https://github.com/FaissalZaw/beeheard">github.com/FaissalZaw/beeheard</a>
+    e si basa esclusivamente su componenti liberi o gratuiti.
+  </p>
+</section>
+
+<section>
+  <h2>Limitazione di responsabilità</h2>
+  <p>
+    Questo prototipo è fornito a fini dimostrativi. Non viene fornita alcuna
+    garanzia quanto alla disponibilità del servizio, all'esattezza dei dati
+    presentati o alla conservazione delle informazioni inserite.
+  </p>
+</section>
+
+<section>
+  <h2>Contenuti dimostrativi</h2>
+  <p>
+    Le testimonianze attualmente presentate sono fittizie. Sono state costruite
+    a partire da ostacoli documentati nella letteratura scientifica e non
+    corrispondono ad alcuna persona reale.
+  </p>
+</section>
+
+{% else %}
 <h1>Mentions légales</h1>
 
 <section>
@@ -13,8 +173,8 @@
   </p>
   <p>
     Il ne s'agit ni d'un service en exploitation, ni d'un dispositif médical,
-    ni d'un registre officiel. Les informations qu'il présente n'ont pas
-    valeur de donnée épidémiologique établie.
+    ni d'un registre officiel. Les informations qu'il présente n'ont pas valeur
+    de donnée épidémiologique établie.
   </p>
 </section>
 
@@ -53,4 +213,5 @@
     correspondent à aucune personne réelle.
   </p>
 </section>
+{% endif %}
 {% endblock %}

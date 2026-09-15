@@ -1,27 +1,26 @@
 {% extends "base.html" %}
-{% block titre %}Témoignage enregistré – BeeHeard{% endblock %}
+{% block titre %}{{ t("conf_titre", langue) }} - BeeHeard{% endblock %}
 
 {% block contenu %}
 <div class="confirmation">
-  <h1>Votre témoignage a été enregistré</h1>
+  <h1>{{ t("conf_titre", langue) }}</h1>
 
   {% if reference %}
   <p class="reference">
-    Référence : <strong>{{ reference }}</strong>
+    {{ t("conf_reference", langue) }} : <strong>{{ reference }}</strong>
   </p>
   {% endif %}
 
-  <p>
-    Il sera examiné avant d'être intégré aux données agrégées. Les informations
-    que vous avez transmises ont été anonymisées selon le niveau que vous avez
-    choisi, et votre consentement a été enregistré avec sa date.
-  </p>
-  <p class="discret">
-    Aucune donnée permettant de vous identifier n'a été conservée.
-  </p>
+  <p>{{ t("conf_texte", langue) }}</p>
+  <p class="discret">{{ t("conf_aucune_donnee", langue) }}</p>
+
   <p class="confirmation-actions">
-    <a href="/tableau-de-bord" class="bouton">Consulter les données</a>
-    <a href="/" class="bouton-secondaire">Retour à l'accueil</a>
+    <a href="/tableau-de-bord" class="bouton">
+      {{ t("accueil_bouton_donnees", langue) }}
+    </a>
+    <a href="/" class="bouton-secondaire">
+      {{ t("conf_retour_accueil", langue) }}
+    </a>
   </p>
 </div>
 {% endblock %}

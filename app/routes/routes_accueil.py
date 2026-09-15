@@ -42,7 +42,9 @@ def afficher_accueil(
 
 @routeur.get("/a-propos", response_class=HTMLResponse)
 def afficher_a_propos(
-    request: Request, session: Session = Depends(obtenir_session)
+    request: Request,
+    session: Session = Depends(obtenir_session),
+    langue: str = Depends(obtenir_langue),
 ) -> HTMLResponse:
     """Explique la démarche, la nomenclature et le cadre du projet."""
     depot = DepotObstacle(session)
@@ -51,6 +53,7 @@ def afficher_a_propos(
         name="a_propos.html",
         context={
             "categories": depot.lister_categories(),
+            "langue_courante": langue,
             "donnees_fictives": DONNEES_FICTIVES,
         },
     )
