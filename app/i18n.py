@@ -288,6 +288,230 @@ TRADUCTIONS: dict[str, dict[str, str]] = {
     },
 }
 
+TRADUCTIONS.update({
+    "champ_role": {
+        "fr": "En quelle qualité témoignez-vous ?",
+        "en": "In what capacity are you reporting?",
+        "de": "In welcher Eigenschaft berichten Sie?",
+        "it": "In quale qualità testimoni?",
+    },
+    "champ_canton": {
+        "fr": "Canton", "en": "Canton", "de": "Kanton", "it": "Cantone",
+    },
+    "champ_age": {
+        "fr": "Tranche d'âge", "en": "Age range",
+        "de": "Altersgruppe", "it": "Fascia d'età",
+    },
+    "non_renseigne": {
+        "fr": "Non renseigné", "en": "Not specified",
+        "de": "Nicht angegeben", "it": "Non indicato",
+    },
+    "age_moins18": {
+        "fr": "Moins de 18 ans", "en": "Under 18",
+        "de": "Unter 18 Jahren", "it": "Meno di 18 anni",
+    },
+    "age_plus60": {
+        "fr": "60 ans et plus", "en": "60 and over",
+        "de": "60 Jahre und älter", "it": "60 anni e oltre",
+    },
+    "aide_anonymisation": {
+        "fr": "Ces deux informations ne sont conservées que si vous choisissez "
+              "un niveau d'anonymisation qui le permet, à la dernière étape.",
+        "en": "These two details are kept only if you choose an anonymisation "
+              "level that allows it, at the final step.",
+        "de": "Diese beiden Angaben werden nur gespeichert, wenn Sie im letzten "
+              "Schritt eine entsprechende Anonymisierungsstufe wählen.",
+        "it": "Queste due informazioni sono conservate solo se scegli un "
+              "livello di anonimizzazione che lo permette, all'ultimo passaggio.",
+    },
+    "champ_pathologie": {
+        "fr": "Pathologie concernée", "en": "Condition concerned",
+        "de": "Betroffene Erkrankung", "it": "Patologia interessata",
+    },
+    "champ_recit": {
+        "fr": "Décrivez la situation que vous avez vécue",
+        "en": "Describe the situation you experienced",
+        "de": "Beschreiben Sie die erlebte Situation",
+        "it": "Descrivi la situazione che hai vissuto",
+    },
+    "placeholder_recit": {
+        "fr": "Racontez librement : ce qui s'est passé, les démarches "
+              "entreprises, les réponses obtenues, les conséquences.",
+        "en": "Describe freely: what happened, the steps taken, the responses "
+              "received, the consequences.",
+        "de": "Schildern Sie frei: was geschehen ist, welche Schritte "
+              "unternommen wurden, welche Antworten kamen, welche Folgen.",
+        "it": "Racconta liberamente: cosa è successo, le azioni intraprese, "
+              "le risposte ottenute, le conseguenze.",
+    },
+    "champ_titre": {
+        "fr": "Titre", "en": "Title", "de": "Titel", "it": "Titolo",
+    },
+    "placeholder_titre": {
+        "fr": "Laissez vide : un titre sera proposé à partir de votre récit",
+        "en": "Leave blank: a title will be derived from your account",
+        "de": "Leer lassen: ein Titel wird aus Ihrem Bericht abgeleitet",
+        "it": "Lascia vuoto: un titolo sarà proposto dal tuo racconto",
+    },
+    "aide_titre": {
+        "fr": "Si vous ne renseignez rien, un intitulé sera généré "
+              "automatiquement en reprenant le début de votre récit.",
+        "en": "If left empty, a title will be generated automatically from the "
+              "beginning of your account.",
+        "de": "Wenn leer, wird ein Titel automatisch aus dem Anfang Ihres "
+              "Berichts erzeugt.",
+        "it": "Se lasci vuoto, un titolo sarà generato automaticamente "
+              "dall'inizio del tuo racconto.",
+    },
+    "champ_date": {
+        "fr": "Date de l'événement", "en": "Date of the event",
+        "de": "Datum des Ereignisses", "it": "Data dell'evento",
+    },
+    "aide_obstacles": {
+        "fr": "Sélectionnez les obstacles qui correspondent à votre situation. "
+              "Cette qualification permet de rendre les témoignages "
+              "comparables. Plusieurs choix sont possibles.",
+        "en": "Select the barriers matching your situation. This "
+              "classification makes accounts comparable. Multiple choices are "
+              "possible.",
+        "de": "Wählen Sie die Hindernisse, die auf Ihre Situation zutreffen. "
+              "Diese Einordnung macht Berichte vergleichbar. Mehrfachauswahl "
+              "ist möglich.",
+        "it": "Seleziona gli ostacoli che corrispondono alla tua situazione. "
+              "Questa qualificazione rende le testimonianze confrontabili. "
+              "Sono possibili più scelte.",
+    },
+    "champ_gravite": {
+        "fr": "Gravité ressentie de la situation",
+        "en": "Perceived severity of the situation",
+        "de": "Empfundener Schweregrad der Situation",
+        "it": "Gravità percepita della situazione",
+    },
+    "champ_duree": {
+        "fr": "Durée du blocage en jours", "en": "Duration of the blockage in days",
+        "de": "Dauer der Blockade in Tagen", "it": "Durata del blocco in giorni",
+    },
+    "placeholder_duree": {
+        "fr": "Par exemple 240 pour huit mois d'attente",
+        "en": "For example 240 for eight months of waiting",
+        "de": "Zum Beispiel 240 für acht Monate Wartezeit",
+        "it": "Ad esempio 240 per otto mesi di attesa",
+    },
+    "aide_niveau": {
+        "fr": "Ce choix est appliqué au moment de l'enregistrement et ne peut "
+              "pas être modifié ensuite.",
+        "en": "This choice is applied on submission and cannot be changed "
+              "afterwards.",
+        "de": "Diese Wahl wird beim Speichern angewendet und kann danach nicht "
+              "mehr geändert werden.",
+        "it": "Questa scelta è applicata al momento della registrazione e non "
+              "può essere modificata in seguito.",
+    },
+    "anon_complet_titre": {
+        "fr": "Anonymisation complète", "en": "Full anonymisation",
+        "de": "Vollständige Anonymisierung", "it": "Anonimizzazione completa",
+    },
+    "anon_complet_desc": {
+        "fr": "Ni canton ni tranche d'âge ne sont conservés. Recommandé.",
+        "en": "Neither canton nor age range is kept. Recommended.",
+        "de": "Weder Kanton noch Altersgruppe werden gespeichert. Empfohlen.",
+        "it": "Né cantone né fascia d'età sono conservati. Consigliato.",
+    },
+    "anon_partiel_titre": {
+        "fr": "Anonymisation partielle", "en": "Partial anonymisation",
+        "de": "Teilweise Anonymisierung", "it": "Anonimizzazione parziale",
+    },
+    "anon_partiel_desc": {
+        "fr": "Le canton est conservé, la tranche d'âge est supprimée.",
+        "en": "The canton is kept, the age range is removed.",
+        "de": "Der Kanton wird gespeichert, die Altersgruppe entfernt.",
+        "it": "Il cantone è conservato, la fascia d'età è eliminata.",
+    },
+    "anon_etendu_titre": {
+        "fr": "Anonymisation étendue", "en": "Extended anonymisation",
+        "de": "Erweiterte Anonymisierung", "it": "Anonimizzazione estesa",
+    },
+    "anon_etendu_desc": {
+        "fr": "Canton et tranche d'âge sont conservés, permettant des analyses "
+              "plus fines.",
+        "en": "Canton and age range are kept, allowing finer analysis.",
+        "de": "Kanton und Altersgruppe werden gespeichert, was feinere "
+              "Auswertungen ermöglicht.",
+        "it": "Cantone e fascia d'età sono conservati, permettendo analisi più "
+              "dettagliate.",
+    },
+    "aide_usages": {
+        "fr": "Chaque usage fait l'objet d'un accord distinct. Aucun n'est "
+              "activé par défaut, à l'exception du comptage statistique.",
+        "en": "Each use requires separate consent. None is enabled by default, "
+              "except statistical counting.",
+        "de": "Jede Verwendung erfordert eine eigene Zustimmung. Keine ist "
+              "standardmässig aktiviert, ausser der statistischen Zählung.",
+        "it": "Ogni uso richiede un consenso distinto. Nessuno è attivo per "
+              "impostazione predefinita, tranne il conteggio statistico.",
+    },
+    "usage_stats_titre": {
+        "fr": "Statistiques agrégées", "en": "Aggregated statistics",
+        "de": "Aggregierte Statistiken", "it": "Statistiche aggregate",
+    },
+    "usage_stats_desc": {
+        "fr": "Votre témoignage alimente des comptages et des répartitions. "
+              "Le récit lui-même n'est pas affiché.",
+        "en": "Your account feeds counts and breakdowns. The narrative itself "
+              "is not displayed.",
+        "de": "Ihr Bericht fliesst in Zählungen und Verteilungen ein. Der Text "
+              "selbst wird nicht angezeigt.",
+        "it": "La tua testimonianza alimenta conteggi e ripartizioni. Il "
+              "racconto stesso non è visualizzato.",
+    },
+    "usage_publication_titre": {
+        "fr": "Publication anonymisée", "en": "Anonymised publication",
+        "de": "Anonymisierte Veröffentlichung", "it": "Pubblicazione anonimizzata",
+    },
+    "usage_publication_desc": {
+        "fr": "Votre récit peut être affiché dans l'espace de consultation, "
+              "sous pseudonyme.",
+        "en": "Your account may be displayed in the consultation area, under a "
+              "pseudonym.",
+        "de": "Ihr Bericht kann im Konsultationsbereich unter einem Pseudonym "
+              "angezeigt werden.",
+        "it": "Il tuo racconto può essere visualizzato nello spazio di "
+              "consultazione, sotto pseudonimo.",
+    },
+    "usage_plaidoyer_titre": {
+        "fr": "Supports de plaidoyer", "en": "Advocacy materials",
+        "de": "Advocacy-Material", "it": "Materiali di advocacy",
+    },
+    "usage_plaidoyer_desc": {
+        "fr": "Votre récit peut être repris dans des documents destinés aux "
+              "associations, aux organisations de santé ou aux décideurs.",
+        "en": "Your account may be used in documents intended for "
+              "associations, health organisations or decision-makers.",
+        "de": "Ihr Bericht kann in Dokumenten für Vereine, "
+              "Gesundheitsorganisationen oder Entscheidungsträger verwendet "
+              "werden.",
+        "it": "Il tuo racconto può essere ripreso in documenti destinati alle "
+              "associazioni, alle organizzazioni sanitarie o ai decisori.",
+    },
+    "consentement_texte": {
+        "fr": "Je consens au traitement des informations que je transmets, "
+              "conformément à la Loi fédérale sur la protection des données. "
+              "J'ai pris connaissance de la",
+        "en": "I consent to the processing of the information I provide, in "
+              "accordance with the Federal Act on Data Protection. I have read "
+              "the",
+        "de": "Ich willige in die Bearbeitung der übermittelten Informationen "
+              "gemäss dem Bundesgesetz über den Datenschutz ein. Ich habe die "
+              "Kenntnis genommen von der",
+        "it": "Acconsento al trattamento delle informazioni che trasmetto, "
+              "conformemente alla Legge federale sulla protezione dei dati. Ho "
+              "preso conoscenza della",
+    },
+    "minimum": {
+        "fr": "minimum", "en": "minimum", "de": "Minimum", "it": "minimo",
+    },
+})
+
 
 def traduire(cle: str, langue: str = "fr") -> str:
     """Retourne la chaîne traduite, avec repli sur le français."""

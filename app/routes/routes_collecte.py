@@ -28,18 +28,55 @@ gabarits.env.globals["t"] = traduire
 gabarits.env.globals["langues"] = LANGUES_DISPONIBLES
 
 LIBELLES_ROLES = {
-    RoleContributeur.PATIENT: "Patient",
-    RoleContributeur.PROCHE: "Proche d'un patient",
-    RoleContributeur.PROFESSIONNEL: "Professionnel de santé",
-    RoleContributeur.ASSOCIATION: "Représentant d'association",
+    RoleContributeur.PATIENT: {
+        "fr": "Patient", "en": "Patient",
+        "de": "Patientin oder Patient", "it": "Paziente",
+    },
+    RoleContributeur.PROCHE: {
+        "fr": "Proche d'un patient", "en": "Relative of a patient",
+        "de": "Angehörige oder Angehöriger", "it": "Familiare di un paziente",
+    },
+    RoleContributeur.PROFESSIONNEL: {
+        "fr": "Professionnel de santé", "en": "Healthcare professional",
+        "de": "Fachperson im Gesundheitswesen", "it": "Professionista sanitario",
+    },
+    RoleContributeur.ASSOCIATION: {
+        "fr": "Représentant d'association", "en": "Association representative",
+        "de": "Vertretung eines Vereins", "it": "Rappresentante di associazione",
+    },
 }
 
 NIVEAUX_GRAVITE = [
-    (1, "Gênant", "Situation contraignante, sans conséquence durable"),
-    (2, "Pénalisant", "A retardé ou compliqué la prise en charge"),
-    (3, "Important", "A eu des répercussions notables sur la situation"),
-    (4, "Grave", "A compromis l'accès au traitement"),
-    (5, "Critique", "A eu des conséquences majeures sur la santé"),
+    (1, {
+        "fr": ("Gênant", "Situation contraignante, sans conséquence durable"),
+        "en": ("Inconvenient", "Constraining situation, no lasting consequence"),
+        "de": ("Störend", "Belastende Situation ohne dauerhafte Folgen"),
+        "it": ("Fastidioso", "Situazione difficile, senza conseguenze durature"),
+    }),
+    (2, {
+        "fr": ("Pénalisant", "A retardé ou compliqué la prise en charge"),
+        "en": ("Detrimental", "Delayed or complicated the care pathway"),
+        "de": ("Nachteilig", "Hat die Versorgung verzögert oder erschwert"),
+        "it": ("Penalizzante", "Ha ritardato o complicato la presa in carico"),
+    }),
+    (3, {
+        "fr": ("Important", "A eu des répercussions notables sur la situation"),
+        "en": ("Significant", "Had notable repercussions on the situation"),
+        "de": ("Erheblich", "Hatte spürbare Auswirkungen auf die Situation"),
+        "it": ("Importante", "Ha avuto ripercussioni notevoli sulla situazione"),
+    }),
+    (4, {
+        "fr": ("Grave", "A compromis l'accès au traitement"),
+        "en": ("Serious", "Compromised access to treatment"),
+        "de": ("Schwerwiegend", "Hat den Zugang zur Behandlung gefährdet"),
+        "it": ("Grave", "Ha compromesso l'accesso al trattamento"),
+    }),
+    (5, {
+        "fr": ("Critique", "A eu des conséquences majeures sur la santé"),
+        "en": ("Critical", "Had major consequences for health"),
+        "de": ("Kritisch", "Hatte gravierende gesundheitliche Folgen"),
+        "it": ("Critico", "Ha avuto conseguenze maggiori sulla salute"),
+    }),
 ]
 
 CANTONS = [
@@ -51,14 +88,27 @@ CANTONS = [
 ]
 
 
-def _contexte_formulaire(session: Session, erreur: str | None = None) -> dict:
+def _contexte_formulaire(
+    session: Session, langue: str = "fr", erreur: str | None = None
+) -> dict:
     """Assemble les données nécessaires à l'affichage du formulaire."""
     depot = DepotObstacle(session)
     return {
+        "langue_courante": langue,
         "categories": depot.lister_categories(),
         "maladies": depot.lister_maladies(),
-        "roles": [(r.value, LIBELLES_ROLES[r]) for r in RoleContributeur],
-        "niveaux_gravite": NIVEAUX_GRAVITE,
+        "roles": [
+            (r.value, LIBELLES_ROLES[r].get(langue, LIBELLES_ROLES[r]["fr"]))
+            for r in RoleContributeur
+        ],
+        "niveaux_gravite": [
+            (
+                valeur,
+                libelles.get(langue, libelles["fr"])[0],
+                libelles.get(langue, libelles["fr"])[1],
+            )
+            for valeur, libelles in NIVEAUX_GRAVITE
+        ],
         "cantons": CANTONS,
         "donnees_fictives": DONNEES_FICTIVES,
         "erreur": erreur,
@@ -67,13 +117,15 @@ def _contexte_formulaire(session: Session, erreur: str | None = None) -> dict:
 
 @routeur.get("/temoignage", response_class=HTMLResponse)
 def afficher_formulaire(
-    request: Request, session: Session = Depends(obtenir_session)
+    request: Request,
+    session: Session = Depends(obtenir_session),
+    langue: str = Depends(obtenir_langue),
 ) -> HTMLResponse:
     """Affiche le formulaire de dépôt d'un témoignage."""
     return gabarits.TemplateResponse(
         request=request,
         name="formulaire.html",
-        context=_contexte_formulaire(session),
+        context=_contexte_formulaire(session, langue),
     )
 
 
@@ -96,6 +148,7 @@ def enregistrer_temoignage(
     autorise_plaidoyer: bool = Form(default=False),
     consentement_donne: bool = Form(default=False),
     session: Session = Depends(obtenir_session),
+    langue: str = Depends(obtenir_langue),
 ):
     """Traite la soumission du formulaire de dépôt."""
     if not obstacles:
@@ -103,7 +156,7 @@ def enregistrer_temoignage(
             request=request,
             name="formulaire.html",
             context=_contexte_formulaire(
-                session, "Veuillez sélectionner au moins un obstacle rencontré."
+                session, langue, "Veuillez sélectionner au moins un obstacle rencontré."
             ),
             status_code=400,
         )
@@ -140,7 +193,7 @@ def enregistrer_temoignage(
             request=request,
             name="formulaire.html",
             context=_contexte_formulaire(
-                session, "Le dépôt requiert votre consentement explicite."
+                session, langue, "Le dépôt requiert votre consentement explicite."
             ),
             status_code=400,
         )
