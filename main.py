@@ -8,7 +8,12 @@ from fastapi.staticfiles import StaticFiles
 
 from app.base_donnees import creer_tables
 from app.config import NOM_APPLICATION, RACINE, VERSION
-from app.routes import routes_collecte, routes_export, routes_tableau_bord
+from app.routes import (
+    routes_accueil,
+    routes_collecte,
+    routes_export,
+    routes_tableau_bord,
+)
 
 @asynccontextmanager
 async def cycle_de_vie(application: FastAPI) -> AsyncGenerator[None, None]:
@@ -33,6 +38,7 @@ app.mount(
     name="static",
 )
 
+app.include_router(routes_accueil.routeur)
 app.include_router(routes_tableau_bord.routeur)
 app.include_router(routes_collecte.routeur)
 app.include_router(routes_export.routeur)

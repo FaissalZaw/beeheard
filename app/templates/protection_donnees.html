@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block titre %}Protection des données – BeeHeard{% endblock %}
+
+{% block contenu %}
+<h1>Protection des données</h1>
+
+<section>
+  <h2>Ce qui est collecté</h2>
+  <p>
+    BeeHeard ne collecte aucune donnée permettant de vous identifier
+    directement. Aucun nom, aucune adresse, aucune coordonnée de contact
+    n'est demandé ni conservé.
+  </p>
+  <p>Les informations enregistrées sont les suivantes :</p>
+  <ul>
+    <li>Un pseudonyme généré automatiquement par le système</li>
+    <li>La qualité en laquelle vous témoignez</li>
+    <li>Le récit que vous rédigez</li>
+    <li>Les obstacles que vous identifiez</li>
+    <li>
+      Selon le niveau d'anonymisation choisi, votre canton et votre tranche
+      d'âge
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Les niveaux d'anonymisation</h2>
+  <p>
+    Vous choisissez, au moment du dépôt, le niveau appliqué à votre
+    contribution. Ce choix est irréversible et s'applique dès
+    l'enregistrement.
+  </p>
+  <ul>
+    <li>
+      <strong>Complet.</strong> Ni canton ni tranche d'âge ne sont conservés.
+      Seuls votre récit et les obstacles identifiés sont enregistrés.
+    </li>
+    <li>
+      <strong>Partiel.</strong> Le canton est conservé, la tranche d'âge est
+      supprimée.
+    </li>
+    <li>
+      <strong>Étendu.</strong> Canton et tranche d'âge sont conservés, ce qui
+      permet des analyses plus fines.
+    </li>
+  </ul>
+  <p class="discret">
+    Dans le champ des maladies rares, le nombre restreint de personnes
+    concernées augmente le risque qu'une combinaison d'attributs permette
+    d'identifier quelqu'un. C'est pourquoi le niveau complet est proposé par
+    défaut.
+  </p>
+</section>
+
+<section>
+  <h2>Les usages autorisés</h2>
+  <p>
+    Vous accordez séparément votre accord pour chaque usage envisagé. Aucun
+    n'est activé par défaut.
+  </p>
+  <ul>
+    <li>
+      <strong>Statistiques agrégées.</strong> Votre témoignage alimente des
+      comptages et des répartitions, sans qu'il soit affiché individuellement.
+    </li>
+    <li>
+      <strong>Publication.</strong> Votre récit peut être affiché sous forme
+      anonymisée dans l'espace de consultation.
+    </li>
+    <li>
+      <strong>Plaidoyer.</strong> Votre récit peut être repris dans des
+      supports destinés aux associations, aux organisations de santé ou aux
+      décideurs.
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Le cadre légal</h2>
+  <p>
+    Les données relatives à la santé sont qualifiées de données sensibles par
+    la Loi fédérale sur la protection des données. Leur traitement requiert un
+    consentement explicite, recueilli avant tout enregistrement et conservé
+    avec sa date et la version du texte accepté.
+  </p>
+</section>
+
+<section>
+  <h2>Validation avant publication</h2>
+  <p>
+    Aucun témoignage n'est publié automatiquement. Chaque contribution est
+    examinée avant d'être intégrée aux données consultables, afin de vérifier
+    qu'elle ne contient pas d'information susceptible d'identifier une
+    personne.
+  </p>
+</section>
+
+<section class="avertissement-prototype">
+  <h2>Statut de ce prototype</h2>
+  <p>
+    BeeHeard est un prototype développé à des fins de démonstration
+    académique. Il n'est pas déployé en production et les données qu'il
+    contient actuellement sont fictives. Aucun témoignage réel ne doit y être
+    déposé en l'état.
+  </p>
+</section>
+{% endblock %}

@@ -13,7 +13,7 @@ routeur = APIRouter(tags=["tableau de bord"])
 gabarits = Jinja2Templates(directory=str(RACINE / "app" / "templates"))
 
 
-@routeur.get("/", response_class=HTMLResponse)
+@routeur.get("/tableau-de-bord", response_class=HTMLResponse)
 def afficher_tableau_bord(
     request: Request, session: Session = Depends(obtenir_session)
 ) -> HTMLResponse:

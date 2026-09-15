@@ -296,3 +296,207 @@ blockquote p { margin: 0 0 8px; }
   .entete, .pied, .actions-impression, .bandeau-avertissement { display: none; }
   .fiche { border: none; padding: 0; }
 }
+
+/* ── Page d'accueil ─────────────────────────────────── */
+
+.hero {
+  padding: 24px 0 44px;
+  max-width: 680px;
+}
+
+.hero h1 {
+  font-size: 34px;
+  line-height: 1.25;
+  margin-bottom: 18px;
+}
+
+.hero-texte {
+  font-size: 17px;
+  color: var(--discret);
+  margin-bottom: 30px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bouton-secondaire {
+  display: inline-block;
+  padding: 11px 22px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.bouton-secondaire:hover {
+  background: var(--accent-clair);
+}
+
+/* Chiffres clés */
+.chiffres {
+  display: flex;
+  gap: 40px;
+  padding: 28px 0;
+  border-top: 1px solid var(--bord);
+  border-bottom: 1px solid var(--bord);
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+}
+
+.chiffre-valeur {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.chiffre-libelle {
+  font-size: 14px;
+  color: var(--discret);
+}
+
+/* Étapes */
+.etapes {
+  display: flex;
+  gap: 28px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.etape {
+  flex: 1;
+  min-width: 220px;
+}
+
+.etape-numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: var(--accent-clair);
+  color: var(--accent);
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.etape h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.etape p {
+  font-size: 14.5px;
+  color: var(--discret);
+  margin: 0;
+}
+
+/* Encart de confiance */
+.encart-confiance {
+  margin-top: 48px;
+  padding: 30px;
+  background: var(--accent-clair);
+  border-radius: 8px;
+}
+
+.encart-confiance h2 {
+  margin-top: 0;
+}
+
+.encart-confiance ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.encart-confiance li {
+  margin-bottom: 11px;
+  font-size: 15px;
+}
+
+/* ── Pages d'information ────────────────────────────── */
+
+section {
+  margin-bottom: 34px;
+}
+
+section p {
+  max-width: 720px;
+}
+
+.bloc-categorie {
+  margin-bottom: 24px;
+  padding-left: 16px;
+  border-left: 2px solid var(--accent-clair);
+}
+
+.bloc-categorie h3 {
+  margin: 0 0 6px;
+  color: var(--accent);
+}
+
+.liste-types {
+  padding-left: 20px;
+  margin: 10px 0 0;
+  columns: 2;
+  column-gap: 32px;
+}
+
+.liste-types li {
+  font-size: 14.5px;
+  margin-bottom: 5px;
+  break-inside: avoid;
+}
+
+.avertissement-prototype {
+  padding: 22px;
+  background: var(--avertissement);
+  border-radius: 8px;
+}
+
+.avertissement-prototype h2 {
+  margin-top: 0;
+  font-size: 17px;
+}
+
+.avertissement-prototype p {
+  margin-bottom: 0;
+  font-size: 15px;
+}
+
+/* ── Pied de page enrichi ───────────────────────────── */
+
+.pied-contenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pied-contenu p {
+  margin: 0;
+}
+
+.pied-liens a {
+  margin-left: 18px;
+  color: var(--discret);
+  text-decoration: none;
+}
+
+.pied-liens a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .liste-types { columns: 1; }
+  .pied-contenu { flex-direction: column; align-items: flex-start; }
+  .pied-liens a { margin: 0 18px 0 0; }
+}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block titre %}BeeHeard, documenter les obstacles d'accès aux traitements{% endblock %}
+
+{% block contenu %}
+<section class="hero">
+  <h1>Rendre visibles les obstacles d'accès aux traitements</h1>
+  <p class="hero-texte">
+    Des traitements existent et sont autorisés, mais n'atteignent pas toujours
+    les personnes qui en ont besoin. Les obstacles rencontrés sont rarement
+    documentés de manière structurée, ce qui les rend invisibles pour ceux qui
+    décident. BeeHeard recueille ces situations et les transforme en données
+    exploitables.
+  </p>
+
+  <div class="hero-actions">
+    <a href="/temoignage" class="bouton">Déposer un témoignage</a>
+    <a href="/tableau-de-bord" class="bouton-secondaire">Consulter les données</a>
+  </div>
+</section>
+
+<section class="chiffres">
+  <div class="chiffre">
+    <span class="chiffre-valeur">{{ nombre_temoignages }}</span>
+    <span class="chiffre-libelle">témoignages recueillis</span>
+  </div>
+  <div class="chiffre">
+    <span class="chiffre-valeur">{{ nombre_obstacles }}</span>
+    <span class="chiffre-libelle">obstacles signalés</span>
+  </div>
+  <div class="chiffre">
+    <span class="chiffre-valeur">29</span>
+    <span class="chiffre-libelle">types d'obstacles documentés</span>
+  </div>
+</section>
+
+<section>
+  <h2>Comment cela fonctionne</h2>
+
+  <div class="etapes">
+    <div class="etape">
+      <span class="etape-numero">1</span>
+      <h3>Vous racontez</h3>
+      <p>
+        Vous décrivez librement la situation que vous avez vécue, en tant que
+        patient, proche, professionnel de santé ou représentant d'association.
+      </p>
+    </div>
+    <div class="etape">
+      <span class="etape-numero">2</span>
+      <h3>Vous qualifiez</h3>
+      <p>
+        Vous identifiez les obstacles rencontrés parmi une liste établie à
+        partir de la littérature scientifique. C'est ce qui rend les
+        témoignages comparables entre eux.
+      </p>
+    </div>
+    <div class="etape">
+      <span class="etape-numero">3</span>
+      <h3>Nous agrégeons</h3>
+      <p>
+        Les témoignages validés alimentent des indicateurs et une fiche de
+        synthèse, utilisables par les associations et les organisations qui
+        portent ces questions auprès des décideurs.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="encart-confiance">
+  <h2>Vos données vous appartiennent</h2>
+  <ul>
+    <li>
+      <strong>Aucune donnée identifiante n'est collectée.</strong>
+      Ni nom, ni adresse, ni coordonnées. Un pseudonyme est généré
+      automatiquement.
+    </li>
+    <li>
+      <strong>Vous choisissez votre niveau d'anonymisation.</strong>
+      Vous décidez si votre région et votre tranche d'âge sont conservées ou
+      supprimées dès l'enregistrement.
+    </li>
+    <li>
+      <strong>Vous décidez des usages autorisés.</strong>
+      Publication et utilisation dans des supports de plaidoyer font l'objet
+      de consentements distincts.
+    </li>
+    <li>
+      <strong>Chaque témoignage est relu avant publication.</strong>
+      Rien n'est diffusé automatiquement.
+    </li>
+  </ul>
+  <p class="discret">
+    Pour le détail, consultez la page
+    <a href="/protection-des-donnees">Protection des données</a>.
+  </p>
+</section>
+{% endblock %}

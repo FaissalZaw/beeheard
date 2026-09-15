@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block titre %}À propos – BeeHeard{% endblock %}
+
+{% block contenu %}
+<h1>À propos de BeeHeard</h1>
+
+<section>
+  <h2>Le constat</h2>
+  <p>
+    L'approbation d'un traitement par une autorité réglementaire ne garantit
+    pas qu'il parvienne aux patients. Entre l'autorisation et l'accès effectif
+    s'intercalent des obstacles économiques, organisationnels, informationnels
+    et sociaux, rarement documentés de manière systématique.
+  </p>
+  <p>
+    La littérature scientifique montre que cette absence de documentation
+    n'est pas seulement une conséquence du problème : elle en est une cause.
+    Faute de données sur les besoins réels, les acteurs susceptibles d'agir
+    renoncent, et les mécanismes de financement adaptés deviennent
+    inapplicables.
+  </p>
+</section>
+
+<section>
+  <h2>La démarche</h2>
+  <p>
+    BeeHeard recueille les témoignages de celles et ceux qui subissent ces
+    obstacles, les rattache à une nomenclature établie, et en produit des
+    indicateurs agrégés. Le récit est conservé dans son intégralité : la
+    qualification structurée s'ajoute au témoignage sans le remplacer.
+  </p>
+</section>
+
+<section>
+  <h2>La nomenclature des obstacles</h2>
+  <p>
+    Les types d'obstacles proposés à la saisie sont dérivés de la littérature
+    scientifique sur l'accès aux soins, et ont été revus avec un expert du
+    domaine. Ils se répartissent en quatre catégories.
+  </p>
+
+  {% for categorie in categories %}
+  <div class="bloc-categorie">
+    <h3>{{ categorie.libelle }}</h3>
+    {% if categorie.description %}
+    <p class="discret">{{ categorie.description }}</p>
+    {% endif %}
+    <ul class="liste-types">
+      {% for type in categorie.types %}
+      <li>{{ type.libelle }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+
+<section>
+  <h2>Qui peut témoigner</h2>
+  <p>
+    Toute personne confrontée à un obstacle d'accès : les patients eux-mêmes,
+    leurs proches, les professionnels de santé qui accompagnent des patients,
+    et les représentants d'associations.
+  </p>
+</section>
+
+<section>
+  <h2>Le cadre du projet</h2>
+  <p>
+    BeeHeard est un prototype développé dans le cadre d'un Travail de Bachelor
+    en Informatique de gestion à la Haute École de Gestion de Genève. Il
+    constitue le volet informatique d'une démarche plus large visant à
+    accélérer l'accès équitable aux traitements dans les maladies rares et
+    négligées.
+  </p>
+  <p>
+    Le code source est disponible publiquement à l'adresse
+    <a href="https://github.com/FaissalZaw/beeheard">github.com/FaissalZaw/beeheard</a>.
+  </p>
+</section>
+{% endblock %}
