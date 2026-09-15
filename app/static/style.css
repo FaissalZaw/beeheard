@@ -1047,3 +1047,21 @@ section p {
 @media (prefers-reduced-motion: reduce) {
   .mot-accent::after { animation: none; }
 }
+
+.hero h1 {
+  font-weight: 500;
+  color: #3D4B57;
+}
+
+.mot-accent {
+  color: #14375A;
+}
+
+.mot-accent::after {
+  background: linear-gradient(
+    90deg,
+    #14375A 0%,
+    #14375A 72%,
+    rgba(20, 55, 90, 0.25) 100%
+  );
+}

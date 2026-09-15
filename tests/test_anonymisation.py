@@ -9,8 +9,14 @@ from app.services.service_anonymisation import (
 
 def test_pseudonyme_respecte_le_format() -> None:
     pseudonyme = generer_pseudonyme()
-    assert pseudonyme.startswith("Contributeur-")
-    assert len(pseudonyme) == len("Contributeur-") + 5
+    assert pseudonyme.startswith("BH-")
+    assert len(pseudonyme) == 8
+
+
+def test_pseudonyme_exclut_les_caracteres_ambigus() -> None:
+    for _ in range(50):
+        suffixe = generer_pseudonyme().removeprefix("BH-")
+        assert not set(suffixe) & set("O0I1")
 
 
 def test_pseudonymes_successifs_sont_distincts() -> None:

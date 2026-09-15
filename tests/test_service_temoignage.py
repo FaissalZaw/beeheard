@@ -56,7 +56,7 @@ def test_depot_genere_un_pseudonyme(session: Session, nomenclature: dict) -> Non
     service = ServiceTemoignage(session)
     temoignage = service.deposer(construire_saisie(nomenclature))
 
-    assert temoignage.contributeur.pseudonyme.startswith("Contributeur-")
+    assert temoignage.contributeur.pseudonyme.startswith("BH-")
 
 
 def test_anonymisation_complete_est_appliquee_au_depot(

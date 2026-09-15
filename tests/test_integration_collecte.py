@@ -63,7 +63,7 @@ def test_tableau_de_bord_est_accessible(client: TestClient) -> None:
     reponse = client.get("/tableau-de-bord")
     assert reponse.status_code == 200
     # Jinja échappe l'apostrophe typographique dans le rendu HTML
-    assert "Obstacles d&#39;accès aux traitements" in reponse.text
+    assert "Obstacles d&#39;accès aux soins et aux traitements" in reponse.text
 
 
 def test_formulaire_affiche_la_nomenclature(client: TestClient) -> None:
@@ -90,7 +90,7 @@ def test_depot_complet_redirige_vers_la_confirmation(client: TestClient) -> None
     )
     assert reponse.status_code == 303
     assert reponse.headers["location"].startswith("/temoignage/confirmation")
-    assert "reference=Contributeur-" in reponse.headers["location"]
+    assert "reference=BH-" in reponse.headers["location"]
 
 
 def test_depot_sans_consentement_est_refuse(client: TestClient) -> None:
