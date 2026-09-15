@@ -97,6 +97,16 @@ TYPES_OBSTACLES = [
 MALADIES = [
     {"nom": "Drépanocytose", "code_orpha": "232", "est_rare": True},
     {"nom": "Bêta-thalassémie", "code_orpha": "848", "est_rare": True},
+    {"nom": "Alpha-thalassémie", "code_orpha": "846", "est_rare": True},
+    {"nom": "Hémophilie A", "code_orpha": "98878", "est_rare": True},
+    {"nom": "Hémophilie B", "code_orpha": "98879", "est_rare": True},
+    {"nom": "Mucoviscidose", "code_orpha": "586", "est_rare": True},
+    {"nom": "Amyotrophie spinale", "code_orpha": "70", "est_rare": True},
+    {"nom": "Maladie de Fabry", "code_orpha": "324", "est_rare": True},
+    {"nom": "Maladie de Gaucher", "code_orpha": "355", "est_rare": True},
+    {"nom": "Sclérose latérale amyotrophique", "code_orpha": "803", "est_rare": True},
+    {"nom": "Syndrome d'Ehlers-Danlos", "code_orpha": "98249", "est_rare": True},
+    {"nom": "Hypertension artérielle pulmonaire", "code_orpha": "182090", "est_rare": True},
 ]
 
 

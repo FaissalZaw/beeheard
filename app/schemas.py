@@ -23,7 +23,8 @@ class TemoignageSaisi(BaseModel):
     region: str | None = None
     tranche_age: str | None = None
 
-    maladie_id: int
+    maladie_id: int | None = None
+    maladie_libre: str | None = Field(default=None, max_length=200)
     titre: str | None = Field(default=None, max_length=200)
     recit: str = Field(min_length=30, max_length=3000)
     date_evenement: date | None = None

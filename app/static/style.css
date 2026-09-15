@@ -1065,3 +1065,14 @@ section p {
     rgba(20, 55, 90, 0.25) 100%
   );
 }
+
+.entete nav a {
+  margin-left: 18px;
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+
+.nav-principale {
+  display: flex;
+  align-items: center;
+}

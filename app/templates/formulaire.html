@@ -57,11 +57,26 @@
     <legend>{{ t("form_votre_temoignage", langue) }}</legend>
 
     <label for="maladie_id">{{ t("champ_pathologie", langue) }}</label>
-    <select name="maladie_id" id="maladie_id" required>
+    <select name="maladie_id" id="maladie_id">
+      <option value="">{{ t("pathologie_choisir", langue) }}</option>
       {% for maladie in maladies %}
       <option value="{{ maladie.id }}">{{ maladie.nom }}</option>
       {% endfor %}
+      <option value="autre">{{ t("pathologie_autre", langue) }}</option>
     </select>
+
+    <div id="zone-maladie-libre" hidden>
+      <label for="maladie_libre">{{ t("pathologie_preciser", langue) }}</label>
+      <input type="text" name="maladie_libre" id="maladie_libre"
+             maxlength="200" list="suggestions-maladies"
+             placeholder="{{ t("pathologie_placeholder", langue) }}">
+      <datalist id="suggestions-maladies">
+        {% for maladie in maladies %}
+        <option value="{{ maladie.nom }}"></option>
+        {% endfor %}
+      </datalist>
+      <p class="aide">{{ t("pathologie_aide", langue) }}</p>
+    </div>
 
     <label for="recit">{{ t("champ_recit", langue) }}</label>
     <div class="zone-recit">

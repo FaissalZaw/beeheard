@@ -37,6 +37,25 @@
     actualiserCompteur();
   }
 
+  /* ── Pathologie non répertoriée ─────────────────── */
+
+  const selectMaladie = document.getElementById("maladie_id");
+  const zoneLibre = document.getElementById("zone-maladie-libre");
+  const champLibre = document.getElementById("maladie_libre");
+
+  if (selectMaladie && zoneLibre && champLibre) {
+    selectMaladie.addEventListener("change", function () {
+      const autre = selectMaladie.value === "autre";
+      zoneLibre.hidden = !autre;
+      champLibre.required = autre;
+      if (autre) {
+        champLibre.focus();
+      } else {
+        champLibre.value = "";
+      }
+    });
+  }
+
   /* ── Dictée vocale ──────────────────────────────── */
 
   const Reconnaissance =

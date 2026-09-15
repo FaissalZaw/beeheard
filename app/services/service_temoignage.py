@@ -1,5 +1,6 @@
 """Logique métier relative aux témoignages."""
 
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.config import VERSION_CONSENTEMENT
@@ -8,6 +9,7 @@ from app.depots.depot_temoignage import DepotTemoignage
 from app.modeles.entites import (
     Consentement,
     Contributeur,
+    Maladie,
     ObstacleSignale,
     Temoignage,
 )
@@ -31,6 +33,10 @@ TRANSITIONS_AUTORISEES: dict[StatutTemoignage, set[StatutTemoignage]] = {
 
 class ConsentementManquantError(Exception):
     """Levée lorsqu'un témoignage est déposé sans consentement explicite."""
+
+
+class PathologieManquanteError(Exception):
+    """Levée lorsqu'aucune pathologie n'est identifiable."""
 
 
 class TransitionInterditeError(Exception):
@@ -71,13 +77,15 @@ class ServiceTemoignage:
         )
         self.depot.ajouter_contributeur(contributeur)
 
+        maladie_id = self._resoudre_maladie(saisie)
+
         titre = saisie.titre.strip() if saisie.titre else ""
         if not titre:
             titre = generer_titre(saisie.recit)
 
         temoignage = Temoignage(
             contributeur_id=contributeur.id,
-            maladie_id=saisie.maladie_id,
+            maladie_id=maladie_id,
             titre=titre,
             recit=saisie.recit,
             date_evenement=saisie.date_evenement,
@@ -106,6 +114,37 @@ class ServiceTemoignage:
         # Le code en clair n'est disponible qu'à cet instant, pour affichage
         temoignage.code_acces_en_clair = code_acces
         return temoignage
+
+    def _resoudre_maladie(self, saisie: TemoignageSaisi) -> int:
+        """Détermine la pathologie concernée, en la créant si nécessaire.
+
+        La nomenclature des pathologies ne peut être exhaustive : un
+        contributeur doit pouvoir signaler une maladie absente de la liste.
+        Celle-ci est alors enregistrée, ce qui permet à des témoignages
+        ultérieurs portant sur la même pathologie d'être regroupés.
+        """
+        if saisie.maladie_id:
+            return saisie.maladie_id
+
+        nom = (saisie.maladie_libre or "").strip()
+        if not nom:
+            raise PathologieManquanteError(
+                "Une pathologie doit être sélectionnée ou renseignée."
+            )
+
+        existante = (
+            self.session.query(Maladie)
+            .filter(func.lower(Maladie.nom) == nom.lower())
+            .first()
+        )
+        if existante is not None:
+            return existante.id
+
+        maladie = Maladie(nom=nom, est_rare=True)
+        self.session.add(maladie)
+        self.session.commit()
+        self.session.refresh(maladie)
+        return maladie.id
 
     def changer_statut(
         self, temoignage: Temoignage, nouveau_statut: StatutTemoignage

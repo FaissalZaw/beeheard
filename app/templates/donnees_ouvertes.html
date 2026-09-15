@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block titre %}{{ t("donnees_titre", langue) }} - BeeHeard{% endblock %}
+
+{% block contenu %}
+<h1>{{ t("donnees_titre", langue) }}</h1>
+<p class="intro">{{ t("donnees_intro", langue) }}</p>
+
+<section class="chiffres">
+  <div class="chiffre">
+    <span class="chiffre-valeur">{{ metadonnees.nombre_signalements }}</span>
+    <span class="chiffre-libelle">{{ t("obstacles_signales", langue) }}</span>
+  </div>
+  <div class="chiffre">
+    <span class="chiffre-valeur">{{ metadonnees.nombre_temoignages }}</span>
+    <span class="chiffre-libelle">{{ t("temoignages", langue) }}</span>
+  </div>
+  <div class="chiffre">
+    <span class="chiffre-valeur">{{ metadonnees.colonnes | length }}</span>
+    <span class="chiffre-libelle">{{ t("donnees_variables", langue) }}</span>
+  </div>
+</section>
+
+<section>
+  <h2>{{ t("donnees_telecharger", langue) }}</h2>
+  <div class="hero-actions">
+    <a href="/donnees/export.csv" class="bouton">CSV</a>
+    <a href="/donnees/export.json" class="bouton-secondaire">JSON</a>
+    <a href="/donnees/metadonnees.json" class="bouton-secondaire">
+      {{ t("donnees_metadonnees", langue) }}
+    </a>
+  </div>
+  <p class="aide">
+    {{ t("donnees_licence", langue) }} : <strong>{{ metadonnees.licence }}</strong>
+    &middot; {{ t("donnees_version", langue) }} {{ metadonnees.version_schema }}
+  </p>
+</section>
+
+<section>
+  <h2>{{ t("donnees_ce_qui_figure", langue) }}</h2>
+  <p>{{ metadonnees.description }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>{{ t("donnees_col_variable", langue) }}</th>
+        <th>{{ t("donnees_col_type", langue) }}</th>
+        <th>{{ t("donnees_col_description", langue) }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for colonne in metadonnees.colonnes %}
+      <tr>
+        <td><code>{{ colonne.nom }}</code></td>
+        <td class="discret">{{ colonne.type }}</td>
+        <td>{{ colonne.description }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="encart-confiance">
+  <h2>{{ t("donnees_restrictions", langue) }}</h2>
+  <ul>
+    <li><strong>{{ t("donnees_r1_titre", langue) }}</strong> {{ t("donnees_r1", langue) }}</li>
+    <li><strong>{{ t("donnees_r2_titre", langue) }}</strong> {{ t("donnees_r2", langue) }}</li>
+    <li><strong>{{ t("donnees_r3_titre", langue) }}</strong> {{ t("donnees_r3", langue) }}</li>
+    <li><strong>{{ t("donnees_r4_titre", langue) }}</strong> {{ t("donnees_r4", langue) }}</li>
+  </ul>
+</section>
+
+<section>
+  <h2>{{ t("donnees_fair", langue) }}</h2>
+  <p>{{ t("donnees_fair_intro", langue) }}</p>
+  <ul>
+    <li><strong>Findable</strong> : {{ t("donnees_findable", langue) }}</li>
+    <li><strong>Accessible</strong> : {{ t("donnees_accessible", langue) }}</li>
+    <li><strong>Interoperable</strong> : {{ t("donnees_interoperable", langue) }}</li>
+    <li><strong>Reusable</strong> : {{ t("donnees_reusable", langue) }}</li>
+  </ul>
+</section>
+
+<section class="avertissement-prototype">
+  <p>{{ metadonnees.avertissement }}</p>
+</section>
+{% endblock %}

@@ -19,7 +19,8 @@ TRADUCTIONS: dict[str, dict[str, str]] = {
         "fr": "Témoigner", "en": "Share", "de": "Berichten", "it": "Testimoniare",
     },
     "nav_donnees": {
-        "fr": "Données", "en": "Data", "de": "Daten", "it": "Dati",
+        "fr": "Tableau de bord", "en": "Dashboard",
+        "de": "Übersicht", "it": "Cruscotto",
     },
     "nav_synthese": {
         "fr": "Synthèse", "en": "Summary", "de": "Übersicht", "it": "Sintesi",
@@ -44,31 +45,27 @@ TRADUCTIONS: dict[str, dict[str, str]] = {
         "it": "gli ostacoli all'accesso alle cure e ai trattamenti",
     },
     "accueil_intro": {
-        "fr": "Des soins sont prévus, des médicaments et des traitements "
-              "existent et sont autorisés, mais ils ne parviennent pas "
-              "toujours jusqu'aux personnes qui en ont besoin. Ces ruptures "
-              "dans la prise en charge sont rarement documentées de manière "
-              "structurée, ce qui les rend invisibles pour les décideurs. "
-              "BeeHeard recueille ces situations vécues et les transforme en "
-              "données exploitables.",
-        "en": "Care pathways are planned, medicines and treatments exist and "
-              "are authorised, yet they do not always reach the people who "
-              "need them. These breakdowns in care are rarely documented in a "
-              "structured way, which makes them invisible to decision-makers. "
-              "BeeHeard collects these lived situations and turns them into "
-              "usable data.",
-        "de": "Versorgungsangebote bestehen, Medikamente und Behandlungen "
-              "existieren und sind zugelassen, erreichen aber nicht immer die "
-              "Menschen, die sie benötigen. Diese Brüche in der Versorgung "
-              "werden selten strukturiert dokumentiert und bleiben für "
-              "Entscheidungsträger unsichtbar. BeeHeard erfasst diese erlebten "
+        "fr": "Des traitements existent et sont autorisés, mais n'atteignent "
+              "pas toujours les personnes qui en ont besoin. Les obstacles "
+              "rencontrés sont rarement documentés de manière structurée, ce "
+              "qui les rend invisibles pour ceux qui décident. BeeHeard "
+              "recueille ces situations et les transforme en données "
+              "exploitables.",
+        "en": "Treatments exist and are authorised, yet they do not always "
+              "reach the people who need them. The barriers encountered are "
+              "rarely documented in a structured way, which makes them "
+              "invisible to those who decide. BeeHeard collects these "
+              "situations and turns them into usable data.",
+        "de": "Behandlungen existieren und sind zugelassen, erreichen aber "
+              "nicht immer die Menschen, die sie benötigen. Die auftretenden "
+              "Hindernisse werden selten strukturiert dokumentiert und bleiben "
+              "für Entscheidungsträger unsichtbar. BeeHeard erfasst diese "
               "Situationen und wandelt sie in verwertbare Daten um.",
-        "it": "Le cure sono previste, i medicinali e i trattamenti esistono e "
-              "sono autorizzati, ma non raggiungono sempre le persone che ne "
-              "hanno bisogno. Queste rotture nella presa in carico sono "
-              "raramente documentate in modo strutturato, il che le rende "
-              "invisibili a chi decide. BeeHeard raccoglie queste situazioni "
-              "vissute e le trasforma in dati utilizzabili.",
+        "it": "I trattamenti esistono e sono autorizzati, ma non raggiungono "
+              "sempre le persone che ne hanno bisogno. Gli ostacoli incontrati "
+              "sono raramente documentati in modo strutturato, il che li rende "
+              "invisibili a chi decide. BeeHeard raccoglie queste situazioni e "
+              "le trasforma in dati utilizzabili.",
     },
     "accueil_bouton_temoigner": {
         "fr": "Déposer un témoignage", "en": "Submit an account",
@@ -882,6 +879,226 @@ TRADUCTIONS.update({
         "en": "Print or save as PDF",
         "de": "Drucken oder als PDF speichern",
         "it": "Stampa o salva in PDF",
+    },
+})
+
+TRADUCTIONS.update({
+    "pathologie_choisir": {
+        "fr": "Sélectionnez une pathologie", "en": "Select a condition",
+        "de": "Erkrankung auswählen", "it": "Seleziona una patologia",
+    },
+    "pathologie_autre": {
+        "fr": "Autre pathologie", "en": "Other condition",
+        "de": "Andere Erkrankung", "it": "Altra patologia",
+    },
+    "pathologie_preciser": {
+        "fr": "Précisez la pathologie", "en": "Specify the condition",
+        "de": "Erkrankung angeben", "it": "Specifica la patologia",
+    },
+    "pathologie_placeholder": {
+        "fr": "Commencez à saisir le nom de la pathologie",
+        "en": "Start typing the name of the condition",
+        "de": "Beginnen Sie, den Namen der Erkrankung einzugeben",
+        "it": "Inizia a digitare il nome della patologia",
+    },
+    "pathologie_aide": {
+        "fr": "Si la pathologie n'apparaît pas dans la liste, saisissez son "
+              "nom. Elle sera ajoutée et disponible pour les témoignages "
+              "suivants.",
+        "en": "If the condition is not listed, enter its name. It will be "
+              "added and available for subsequent accounts.",
+        "de": "Erscheint die Erkrankung nicht in der Liste, geben Sie ihren "
+              "Namen ein. Sie wird hinzugefügt und steht für weitere Berichte "
+              "zur Verfügung.",
+        "it": "Se la patologia non compare nell'elenco, inserisci il suo nome. "
+              "Sarà aggiunta e disponibile per le testimonianze successive.",
+    },
+})
+
+TRADUCTIONS.update({
+    "nav_donnees_ouvertes": {
+        "fr": "Données ouvertes", "en": "Open data",
+        "de": "Offene Daten", "it": "Dati aperti",
+    },
+    "donnees_titre": {
+        "fr": "Données ouvertes", "en": "Open data",
+        "de": "Offene Daten", "it": "Dati aperti",
+    },
+    "donnees_intro": {
+        "fr": "Les obstacles signalés sont mis à disposition sous forme de "
+              "jeu de données structuré, réutilisable à des fins de recherche, "
+              "de sensibilisation ou de plaidoyer.",
+        "en": "Reported barriers are made available as a structured dataset, "
+              "reusable for research, awareness-raising or advocacy purposes.",
+        "de": "Die gemeldeten Hindernisse werden als strukturierter Datensatz "
+              "bereitgestellt, nutzbar für Forschung, Sensibilisierung oder "
+              "Advocacy.",
+        "it": "Gli ostacoli segnalati sono messi a disposizione come set di "
+              "dati strutturato, riutilizzabile per ricerca, sensibilizzazione "
+              "o advocacy.",
+    },
+    "donnees_variables": {
+        "fr": "variables décrites", "en": "documented variables",
+        "de": "beschriebene Variablen", "it": "variabili descritte",
+    },
+    "donnees_telecharger": {
+        "fr": "Télécharger le jeu de données", "en": "Download the dataset",
+        "de": "Datensatz herunterladen", "it": "Scaricare il set di dati",
+    },
+    "donnees_metadonnees": {
+        "fr": "Métadonnées seules", "en": "Metadata only",
+        "de": "Nur Metadaten", "it": "Solo metadati",
+    },
+    "donnees_licence": {
+        "fr": "Licence", "en": "Licence", "de": "Lizenz", "it": "Licenza",
+    },
+    "donnees_version": {
+        "fr": "schéma version", "en": "schema version",
+        "de": "Schemaversion", "it": "versione schema",
+    },
+    "donnees_ce_qui_figure": {
+        "fr": "Ce que contient le jeu de données",
+        "en": "What the dataset contains",
+        "de": "Inhalt des Datensatzes",
+        "it": "Cosa contiene il set di dati",
+    },
+    "donnees_col_variable": {
+        "fr": "Variable", "en": "Variable", "de": "Variable", "it": "Variabile",
+    },
+    "donnees_col_type": {
+        "fr": "Type", "en": "Type", "de": "Typ", "it": "Tipo",
+    },
+    "donnees_col_description": {
+        "fr": "Description", "en": "Description",
+        "de": "Beschreibung", "it": "Descrizione",
+    },
+    "donnees_restrictions": {
+        "fr": "Ce qui ne figure pas dans le jeu de données",
+        "en": "What the dataset does not contain",
+        "de": "Was der Datensatz nicht enthält",
+        "it": "Cosa non contiene il set di dati",
+    },
+    "donnees_r1_titre": {
+        "fr": "Aucun récit intégral.", "en": "No full narrative.",
+        "de": "Keine vollständigen Berichte.", "it": "Nessun racconto integrale.",
+    },
+    "donnees_r1": {
+        "fr": "Seule la qualification structurée est exportée, accompagnée de "
+              "la longueur du récit comme indicateur de richesse.",
+        "en": "Only the structured classification is exported, along with the "
+              "narrative length as an indicator of richness.",
+        "de": "Nur die strukturierte Einordnung wird exportiert, ergänzt um "
+              "die Textlänge als Hinweis auf den Detailgrad.",
+        "it": "Solo la qualificazione strutturata è esportata, con la lunghezza "
+              "del racconto come indicatore di ricchezza.",
+    },
+    "donnees_r2_titre": {
+        "fr": "Aucune date précise.", "en": "No precise dates.",
+        "de": "Keine genauen Daten.", "it": "Nessuna data precisa.",
+    },
+    "donnees_r2": {
+        "fr": "L'année seule est conservée, le jour et le mois étant retirés "
+              "pour limiter le risque de réidentification.",
+        "en": "Only the year is kept, day and month being removed to limit "
+              "the risk of reidentification.",
+        "de": "Nur das Jahr bleibt erhalten, Tag und Monat werden entfernt, um "
+              "das Risiko einer Reidentifikation zu verringern.",
+        "it": "È conservato solo l'anno, giorno e mese sono rimossi per "
+              "limitare il rischio di reidentificazione.",
+    },
+    "donnees_r3_titre": {
+        "fr": "Aucun identifiant de personne.", "en": "No personal identifier.",
+        "de": "Keine Personenkennung.", "it": "Nessun identificativo personale.",
+    },
+    "donnees_r3": {
+        "fr": "Les identifiants sont propres au jeu de données et ne "
+              "permettent aucun rapprochement avec une personne.",
+        "en": "Identifiers are specific to the dataset and allow no link to "
+              "an individual.",
+        "de": "Die Kennungen gelten nur innerhalb des Datensatzes und lassen "
+              "keinen Rückschluss auf Personen zu.",
+        "it": "Gli identificativi sono propri del set di dati e non permettono "
+              "alcun collegamento con una persona.",
+    },
+    "donnees_r4_titre": {
+        "fr": "Consentement requis.", "en": "Consent required.",
+        "de": "Zustimmung erforderlich.", "it": "Consenso richiesto.",
+    },
+    "donnees_r4": {
+        "fr": "Seuls les témoignages dont le contributeur a explicitement "
+              "autorisé un usage externe figurent dans l'export.",
+        "en": "Only accounts whose contributor explicitly authorised external "
+              "use appear in the export.",
+        "de": "Nur Berichte, deren Verfasser einer externen Nutzung "
+              "ausdrücklich zugestimmt hat, erscheinen im Export.",
+        "it": "Solo le testimonianze il cui contributore ha esplicitamente "
+              "autorizzato un uso esterno figurano nell'export.",
+    },
+    "donnees_fair": {
+        "fr": "Alignement sur les principes FAIR",
+        "en": "Alignment with FAIR principles",
+        "de": "Ausrichtung an den FAIR-Prinzipien",
+        "it": "Allineamento ai principi FAIR",
+    },
+    "donnees_fair_intro": {
+        "fr": "Les principes FAIR visent à rendre les données de recherche "
+              "repérables, accessibles, interopérables et réutilisables. Le "
+              "prototype s'y aligne dans les limites suivantes.",
+        "en": "The FAIR principles aim to make research data findable, "
+              "accessible, interoperable and reusable. The prototype aligns "
+              "with them within the following limits.",
+        "de": "Die FAIR-Prinzipien sollen Forschungsdaten auffindbar, "
+              "zugänglich, interoperabel und wiederverwendbar machen. Der "
+              "Prototyp folgt ihnen im nachstehenden Rahmen.",
+        "it": "I principi FAIR mirano a rendere i dati di ricerca "
+              "reperibili, accessibili, interoperabili e riutilizzabili. Il "
+              "prototipo vi si allinea entro i limiti seguenti.",
+    },
+    "donnees_findable": {
+        "fr": "chaque signalement porte un identifiant stable et les "
+              "métadonnées sont exposées séparément, sans identifiant pérenne "
+              "de type DOI à ce stade",
+        "en": "each report carries a stable identifier and metadata is exposed "
+              "separately, without a persistent identifier such as a DOI at "
+              "this stage",
+        "de": "jede Meldung trägt eine stabile Kennung und die Metadaten sind "
+              "separat abrufbar, ohne persistenten Bezeichner wie DOI in "
+              "diesem Stadium",
+        "it": "ogni segnalazione porta un identificativo stabile e i metadati "
+              "sono esposti separatamente, senza identificativo persistente "
+              "di tipo DOI in questa fase",
+    },
+    "donnees_accessible": {
+        "fr": "les données agrégées sont téléchargeables librement par un "
+              "protocole standard, sans authentification",
+        "en": "aggregated data is freely downloadable through a standard "
+              "protocol, without authentication",
+        "de": "aggregierte Daten sind über ein Standardprotokoll frei "
+              "herunterladbar, ohne Authentifizierung",
+        "it": "i dati aggregati sono liberamente scaricabili tramite un "
+              "protocollo standard, senza autenticazione",
+    },
+    "donnees_interoperable": {
+        "fr": "les formats CSV et JSON sont ouverts, la nomenclature repose "
+              "sur des codes stables et les pathologies portent leur "
+              "identifiant Orphanet",
+        "en": "the CSV and JSON formats are open, the classification relies on "
+              "stable codes and conditions carry their Orphanet identifier",
+        "de": "die Formate CSV und JSON sind offen, die Systematik beruht auf "
+              "stabilen Codes und Erkrankungen tragen ihre Orphanet-Kennung",
+        "it": "i formati CSV e JSON sono aperti, la nomenclatura si basa su "
+              "codici stabili e le patologie portano il loro identificativo "
+              "Orphanet",
+    },
+    "donnees_reusable": {
+        "fr": "chaque variable est documentée, la licence est explicite et les "
+              "conditions de consentement sont respectées",
+        "en": "each variable is documented, the licence is explicit and "
+              "consent conditions are respected",
+        "de": "jede Variable ist dokumentiert, die Lizenz ist explizit und die "
+              "Zustimmungsbedingungen werden eingehalten",
+        "it": "ogni variabile è documentata, la licenza è esplicita e le "
+              "condizioni di consenso sono rispettate",
     },
 })
 

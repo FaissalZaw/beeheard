@@ -16,6 +16,7 @@ from app.modeles.enumerations import NiveauAnonymisation, RoleContributeur
 from app.schemas import ObstacleSaisi, TemoignageSaisi
 from app.services.service_temoignage import (
     ConsentementManquantError,
+    PathologieManquanteError,
     ServiceTemoignage,
 )
 
@@ -133,7 +134,8 @@ def afficher_formulaire(
 def enregistrer_temoignage(
     request: Request,
     role: str = Form(...),
-    maladie_id: int = Form(...),
+    maladie_id: str = Form(default=""),
+    maladie_libre: str = Form(default=""),
     recit: str = Form(...),
     titre: str = Form(default=""),
     region: str = Form(default=""),
@@ -165,7 +167,8 @@ def enregistrer_temoignage(
         role=RoleContributeur(role),
         region=region or None,
         tranche_age=tranche_age or None,
-        maladie_id=maladie_id,
+        maladie_id=int(maladie_id) if maladie_id.isdigit() else None,
+        maladie_libre=maladie_libre or None,
         titre=titre or None,
         recit=recit,
         date_evenement=date.fromisoformat(date_evenement) if date_evenement else None,
@@ -188,6 +191,17 @@ def enregistrer_temoignage(
 
     try:
         temoignage = service.deposer(saisie)
+    except PathologieManquanteError:
+        return gabarits.TemplateResponse(
+            request=request,
+            name="formulaire.html",
+            context=_contexte_formulaire(
+                session,
+                langue,
+                "Veuillez sélectionner ou renseigner une pathologie.",
+            ),
+            status_code=400,
+        )
     except ConsentementManquantError:
         return gabarits.TemplateResponse(
             request=request,
