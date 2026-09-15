@@ -37,3 +37,16 @@ class CodeCategorie(str, Enum):
     ORGANISATIONNEL = "organisationnel"
     INFORMATIONNEL = "informationnel"
     SOCIAL = "social"
+
+
+class Langue(str, Enum):
+    """Langues prises en charge par l'interface."""
+
+    FR = "fr"
+    EN = "en"
+    DE = "de"
+    IT = "it"
+
+    @classmethod
+    def par_defaut(cls) -> "Langue":
+        return cls.FR

@@ -12,7 +12,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.base_donnees import FabriqueSession, creer_tables
-from app.modeles.entites import CategorieObstacle, Maladie, TypeObstacle
+from app.modeles.entites import (
+    CategorieObstacle,
+    Maladie,
+    TraductionCategorie,
+    TraductionType,
+    TypeObstacle,
+)
+from scripts.traductions import TRADUCTIONS_CATEGORIES, TRADUCTIONS_TYPES
 
 CATEGORIES = [
     {
@@ -120,7 +127,40 @@ def initialiser() -> None:
         for donnees in MALADIES:
             session.add(Maladie(**donnees))
 
+        session.flush()
+
+        # Traductions des catégories
+        nombre_traductions = 0
+        for categorie in session.query(CategorieObstacle).all():
+            for langue, (libelle, description) in TRADUCTIONS_CATEGORIES.get(
+                categorie.code, {}
+            ).items():
+                session.add(
+                    TraductionCategorie(
+                        categorie_id=categorie.id,
+                        langue=langue,
+                        libelle=libelle,
+                        description=description,
+                    )
+                )
+                nombre_traductions += 1
+
+        # Traductions des types d'obstacles
+        for type_obstacle in session.query(TypeObstacle).all():
+            for langue, libelle in TRADUCTIONS_TYPES.get(
+                type_obstacle.code, {}
+            ).items():
+                session.add(
+                    TraductionType(
+                        type_obstacle_id=type_obstacle.id,
+                        langue=langue,
+                        libelle=libelle,
+                    )
+                )
+                nombre_traductions += 1
+
         session.commit()
+        print(f"{nombre_traductions} traductions insérées.")
 
         print(f"{len(CATEGORIES)} catégories insérées.")
         print(f"{len(TYPES_OBSTACLES)} types d'obstacles insérés.")

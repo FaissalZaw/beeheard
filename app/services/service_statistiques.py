@@ -16,6 +16,8 @@ from app.modeles.entites import (
     Contributeur,
     ObstacleSignale,
     Temoignage,
+    TraductionCategorie,
+    TraductionType,
     TypeObstacle,
 )
 from app.modeles.enumerations import StatutTemoignage
@@ -26,8 +28,9 @@ class ServiceStatistiques:
 
     STATUTS_RETENUS = (StatutTemoignage.VALIDE, StatutTemoignage.PUBLIE)
 
-    def __init__(self, session: Session) -> None:
+    def __init__(self, session: Session, langue: str = "fr") -> None:
         self.session = session
+        self.langue = langue
 
     def _filtre_statut(self):
         """Restreint l'analyse aux témoignages validés ou publiés."""
@@ -48,18 +51,33 @@ class ServiceStatistiques:
         return self.session.execute(requete).scalar_one()
 
     def repartition_par_categorie(self) -> list[dict]:
-        """Nombre de signalements par catégorie d'obstacle."""
+        """Nombre de signalements par catégorie d'obstacle.
+
+        Le libellé retourné est celui de la langue courante lorsqu'une
+        traduction existe, et le libellé source sinon.
+        """
         requete = (
             select(
-                CategorieObstacle.libelle,
+                func.coalesce(
+                    TraductionCategorie.libelle, CategorieObstacle.libelle
+                ).label("libelle"),
                 func.count(ObstacleSignale.id).label("effectif"),
             )
             .select_from(ObstacleSignale)
             .join(TypeObstacle, ObstacleSignale.type_obstacle_id == TypeObstacle.id)
             .join(CategorieObstacle, TypeObstacle.categorie_id == CategorieObstacle.id)
             .join(Temoignage, ObstacleSignale.temoignage_id == Temoignage.id)
+            .outerjoin(
+                TraductionCategorie,
+                (TraductionCategorie.categorie_id == CategorieObstacle.id)
+                & (TraductionCategorie.langue == self.langue),
+            )
             .where(self._filtre_statut())
-            .group_by(CategorieObstacle.libelle)
+            .group_by(
+                func.coalesce(
+                    TraductionCategorie.libelle, CategorieObstacle.libelle
+                )
+            )
             .order_by(func.count(ObstacleSignale.id).desc())
         )
         resultats = self.session.execute(requete).all()
@@ -78,8 +96,12 @@ class ServiceStatistiques:
         """Types d'obstacles les plus fréquemment signalés."""
         requete = (
             select(
-                TypeObstacle.libelle,
-                CategorieObstacle.libelle.label("categorie"),
+                func.coalesce(
+                    TraductionType.libelle, TypeObstacle.libelle
+                ).label("libelle"),
+                func.coalesce(
+                    TraductionCategorie.libelle, CategorieObstacle.libelle
+                ).label("categorie"),
                 func.count(ObstacleSignale.id).label("effectif"),
                 func.avg(ObstacleSignale.severite).label("severite_moyenne"),
             )
@@ -87,8 +109,23 @@ class ServiceStatistiques:
             .join(TypeObstacle, ObstacleSignale.type_obstacle_id == TypeObstacle.id)
             .join(CategorieObstacle, TypeObstacle.categorie_id == CategorieObstacle.id)
             .join(Temoignage, ObstacleSignale.temoignage_id == Temoignage.id)
+            .outerjoin(
+                TraductionType,
+                (TraductionType.type_obstacle_id == TypeObstacle.id)
+                & (TraductionType.langue == self.langue),
+            )
+            .outerjoin(
+                TraductionCategorie,
+                (TraductionCategorie.categorie_id == CategorieObstacle.id)
+                & (TraductionCategorie.langue == self.langue),
+            )
             .where(self._filtre_statut())
-            .group_by(TypeObstacle.libelle, CategorieObstacle.libelle)
+            .group_by(
+                func.coalesce(TraductionType.libelle, TypeObstacle.libelle),
+                func.coalesce(
+                    TraductionCategorie.libelle, CategorieObstacle.libelle
+                ),
+            )
             .order_by(func.count(ObstacleSignale.id).desc())
             .limit(limite)
         )

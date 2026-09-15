@@ -1,42 +1,42 @@
 {% extends "base.html" %}
-{% block titre %}Tableau de bord – BeeHeard{% endblock %}
+{% block titre %}{{ t("tdb_titre", langue) }} - BeeHeard{% endblock %}
 
 {% block contenu %}
-<h1>Obstacles d'accès aux traitements</h1>
-<p class="intro">
-  Indicateurs agrégés issus des témoignages validés.
-</p>
+<h1>{{ t("tdb_titre", langue) }}</h1>
+<p class="intro">{{ t("tdb_intro", langue) }}</p>
 
 <div class="indicateurs">
   <div class="indicateur">
     <span class="valeur">{{ synthese.nombre_temoignages }}</span>
-    <span class="libelle">témoignages</span>
+    <span class="libelle">{{ t("temoignages", langue) }}</span>
   </div>
   <div class="indicateur">
     <span class="valeur">{{ synthese.nombre_obstacles }}</span>
-    <span class="libelle">obstacles signalés</span>
+    <span class="libelle">{{ t("obstacles_signales", langue) }}</span>
   </div>
   <div class="indicateur">
     <span class="valeur">
       {% if synthese.duree_moyenne_blocage %}
         {{ synthese.duree_moyenne_blocage | round | int }}
-      {% else %}
-        –
-      {% endif %}
+      {% else %}-{% endif %}
     </span>
-    <span class="libelle">jours de blocage en moyenne</span>
+    <span class="libelle">{{ t("jours_blocage", langue) }}</span>
   </div>
 </div>
 
 {% if synthese.nombre_temoignages == 0 %}
 <div class="vide">
-  <p>Aucun témoignage validé pour le moment.</p>
-  <p><a href="/temoignage" class="bouton">Déposer le premier témoignage</a></p>
+  <p>{{ t("tdb_vide", langue) }}</p>
+  <p>
+    <a href="/temoignage" class="bouton">
+      {{ t("accueil_bouton_temoigner", langue) }}
+    </a>
+  </p>
 </div>
 {% else %}
 
 <section>
-  <h2>Répartition par catégorie d'obstacle</h2>
+  <h2>{{ t("tdb_par_categorie", langue) }}</h2>
   {% for ligne in synthese.par_categorie %}
   <div class="barre-ligne">
     <div class="barre-libelle">{{ ligne.libelle }}</div>
@@ -49,14 +49,14 @@
 </section>
 
 <section>
-  <h2>Obstacles les plus fréquemment signalés</h2>
+  <h2>{{ t("tdb_frequents", langue) }}</h2>
   <table>
     <thead>
       <tr>
-        <th>Obstacle</th>
-        <th>Catégorie</th>
-        <th>Signalements</th>
-        <th>Gravité moyenne</th>
+        <th>{{ t("col_obstacle", langue) }}</th>
+        <th>{{ t("col_categorie", langue) }}</th>
+        <th>{{ t("col_signalements", langue) }}</th>
+        <th>{{ t("col_gravite", langue) }}</th>
       </tr>
     </thead>
     <tbody>
@@ -73,10 +73,13 @@
 </section>
 
 <section>
-  <h2>Répartition par profil de contributeur</h2>
+  <h2>{{ t("tdb_par_role", langue) }}</h2>
   <table>
     <thead>
-      <tr><th>Qualité</th><th>Témoignages</th></tr>
+      <tr>
+        <th>{{ t("col_qualite", langue) }}</th>
+        <th>{{ t("temoignages", langue) | capitalize }}</th>
+      </tr>
     </thead>
     <tbody>
       {% for ligne in synthese.par_role %}

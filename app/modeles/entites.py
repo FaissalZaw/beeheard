@@ -8,7 +8,7 @@ catégories retenues.
 
 from datetime import date, datetime
 
-from sqlalchemy import Date, DateTime, ForeignKey, String, Text
+from sqlalchemy import Date, DateTime, ForeignKey, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.base_donnees import Base
@@ -30,6 +30,23 @@ class CategorieObstacle(Base):
     description: Mapped[str | None] = mapped_column(Text)
 
     types: Mapped[list["TypeObstacle"]] = relationship(back_populates="categorie")
+    traductions: Mapped[list["TraductionCategorie"]] = relationship(
+        back_populates="categorie", cascade="all, delete-orphan"
+    )
+
+    def libelle_dans(self, langue: str) -> str:
+        """Retourne le libellé dans la langue demandée, ou le libellé source."""
+        for traduction in self.traductions:
+            if traduction.langue == langue:
+                return traduction.libelle
+        return self.libelle
+
+    def description_dans(self, langue: str) -> str | None:
+        """Retourne la description dans la langue demandée."""
+        for traduction in self.traductions:
+            if traduction.langue == langue and traduction.description:
+                return traduction.description
+        return self.description
 
     def __repr__(self) -> str:
         return f"<CategorieObstacle {self.code}>"
@@ -50,6 +67,16 @@ class TypeObstacle(Base):
     signalements: Mapped[list["ObstacleSignale"]] = relationship(
         back_populates="type_obstacle"
     )
+    traductions: Mapped[list["TraductionType"]] = relationship(
+        back_populates="type_obstacle", cascade="all, delete-orphan"
+    )
+
+    def libelle_dans(self, langue: str) -> str:
+        """Retourne le libellé dans la langue demandée, ou le libellé source."""
+        for traduction in self.traductions:
+            if traduction.langue == langue:
+                return traduction.libelle
+        return self.libelle
 
     def __repr__(self) -> str:
         return f"<TypeObstacle {self.code}>"
@@ -171,3 +198,50 @@ class Consentement(Base):
 
     def __repr__(self) -> str:
         return f"<Consentement {self.id} ({self.niveau_anonymisation})>"
+
+
+class TraductionCategorie(Base):
+    """Traduction d'une catégorie d'obstacle dans une langue donnée.
+
+    Le recours à une table de traduction plutôt qu'à des colonnes dédiées
+    permet d'ajouter une langue sans modifier le schéma de la base.
+    """
+
+    __tablename__ = "traduction_categorie"
+    __table_args__ = (
+        UniqueConstraint("categorie_id", "langue", name="uq_traduction_categorie"),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    categorie_id: Mapped[int] = mapped_column(ForeignKey("categorie_obstacle.id"))
+    langue: Mapped[str] = mapped_column(String(5))
+    libelle: Mapped[str] = mapped_column(String(120))
+    description: Mapped[str | None] = mapped_column(Text)
+
+    categorie: Mapped["CategorieObstacle"] = relationship(
+        back_populates="traductions"
+    )
+
+    def __repr__(self) -> str:
+        return f"<TraductionCategorie {self.langue}>"
+
+
+class TraductionType(Base):
+    """Traduction d'un type d'obstacle dans une langue donnée."""
+
+    __tablename__ = "traduction_type"
+    __table_args__ = (
+        UniqueConstraint("type_obstacle_id", "langue", name="uq_traduction_type"),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    type_obstacle_id: Mapped[int] = mapped_column(ForeignKey("type_obstacle.id"))
+    langue: Mapped[str] = mapped_column(String(5))
+    libelle: Mapped[str] = mapped_column(String(200))
+
+    type_obstacle: Mapped["TypeObstacle"] = relationship(
+        back_populates="traductions"
+    )
+
+    def __repr__(self) -> str:
+        return f"<TraductionType {self.langue}>"

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ langue }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,19 +10,27 @@
   <header class="entete">
     <div class="conteneur entete-contenu">
       <a href="/" class="logo">BeeHeard</a>
-      <nav>
-        <a href="/temoignage">Témoigner</a>
-        <a href="/tableau-de-bord">Données</a>
-        <a href="/synthese">Synthèse</a>
-        <a href="/a-propos">À propos</a>
+
+      <nav class="nav-principale">
+        <a href="/temoignage">{{ t("nav_temoigner", langue) }}</a>
+        <a href="/tableau-de-bord">{{ t("nav_donnees", langue) }}</a>
+        <a href="/synthese">{{ t("nav_synthese", langue) }}</a>
+        <a href="/a-propos">{{ t("nav_a_propos", langue) }}</a>
       </nav>
+
+      <div class="selecteur-langue">
+        {% for code, nom in langues %}
+        <a href="/langue/{{ code }}"
+           class="langue{% if code == langue %} langue-active{% endif %}"
+           title="{{ nom }}">{{ code | upper }}</a>
+        {% endfor %}
+      </div>
     </div>
   </header>
 
   {% if donnees_fictives %}
   <div class="bandeau-avertissement">
-    Jeu de données de démonstration. Les témoignages présentés sont fictifs
-    et ne reflètent pas de situations réelles.
+    {{ t("bandeau_demo", langue) }}
   </div>
   {% endif %}
 
@@ -32,14 +40,11 @@
 
   <footer class="pied">
     <div class="conteneur pied-contenu">
-      <p>
-        BeeHeard, prototype développé dans le cadre d'un Travail de Bachelor
-        en Informatique de gestion, HEG Genève.
-      </p>
+      <p>{{ t("pied_projet", langue) }}</p>
       <nav class="pied-liens">
-        <a href="/a-propos">À propos</a>
-        <a href="/protection-des-donnees">Protection des données</a>
-        <a href="/mentions-legales">Mentions légales</a>
+        <a href="/a-propos">{{ t("nav_a_propos", langue) }}</a>
+        <a href="/protection-des-donnees">{{ t("pied_protection", langue) }}</a>
+        <a href="/mentions-legales">{{ t("pied_mentions", langue) }}</a>
       </nav>
     </div>
   </footer>

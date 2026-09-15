@@ -8,21 +8,30 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from app.base_donnees import obtenir_session
+from app.dependances import obtenir_langue
+from app.i18n import LANGUES_DISPONIBLES, contexte_langue, traduire
 from app.config import DONNEES_FICTIVES, RACINE
 from app.depots.depot_temoignage import DepotTemoignage
 from app.modeles.enumerations import StatutTemoignage
 from app.services.service_statistiques import ServiceStatistiques
 
 routeur = APIRouter(tags=["restitution"])
-gabarits = Jinja2Templates(directory=str(RACINE / "app" / "templates"))
+gabarits = Jinja2Templates(
+    directory=str(RACINE / "app" / "templates"),
+    context_processors=[contexte_langue],
+)
+gabarits.env.globals["t"] = traduire
+gabarits.env.globals["langues"] = LANGUES_DISPONIBLES
 
 
 @routeur.get("/synthese", response_class=HTMLResponse)
 def afficher_fiche_synthese(
-    request: Request, session: Session = Depends(obtenir_session)
+    request: Request,
+    session: Session = Depends(obtenir_session),
+    langue: str = Depends(obtenir_langue),
 ) -> HTMLResponse:
     """Produit une fiche de synthèse destinée aux acteurs du plaidoyer."""
-    statistiques = ServiceStatistiques(session)
+    statistiques = ServiceStatistiques(session, langue)
     depot = DepotTemoignage(session)
 
     temoignages = depot.lister(StatutTemoignage.VALIDE)

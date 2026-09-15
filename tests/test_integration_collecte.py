@@ -62,7 +62,8 @@ def test_sonde_de_sante(client: TestClient) -> None:
 def test_tableau_de_bord_est_accessible(client: TestClient) -> None:
     reponse = client.get("/tableau-de-bord")
     assert reponse.status_code == 200
-    assert "Obstacles d'accès aux traitements" in reponse.text
+    # Jinja échappe l'apostrophe typographique dans le rendu HTML
+    assert "Obstacles d&#39;accès aux traitements" in reponse.text
 
 
 def test_formulaire_affiche_la_nomenclature(client: TestClient) -> None:

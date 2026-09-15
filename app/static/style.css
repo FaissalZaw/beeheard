@@ -770,3 +770,41 @@ section p {
   margin-top: 26px;
   flex-wrap: wrap;
 }
+
+
+/* Selecteur de langue */
+
+.entete-contenu { gap: 20px; }
+.nav-principale { margin-right: auto; margin-left: 24px; }
+
+.selecteur-langue {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.selecteur-langue .langue {
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--discret);
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.selecteur-langue .langue:hover {
+  background: var(--accent-clair);
+  color: var(--accent);
+}
+
+.selecteur-langue .langue-active {
+  background: var(--accent);
+  color: white;
+}
+
+@media (max-width: 760px) {
+  .entete-contenu { flex-wrap: wrap; }
+  .nav-principale { margin-left: 0; width: 100%; order: 3; }
+  .nav-principale a:first-child { margin-left: 0; }
+}
