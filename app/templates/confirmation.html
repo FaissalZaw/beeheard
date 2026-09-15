@@ -5,10 +5,29 @@
 <div class="confirmation">
   <h1>{{ t("conf_titre", langue) }}</h1>
 
-  {% if reference %}
-  <p class="reference">
-    {{ t("conf_reference", langue) }} : <strong>{{ reference }}</strong>
-  </p>
+  {% if reference and code %}
+  <div class="bloc-references" id="bloc-references">
+    <div class="reference-ligne">
+      <span class="reference-etiquette">{{ t("conf_reference", langue) }}</span>
+      <span class="reference-valeur" id="valeur-reference">{{ reference }}</span>
+    </div>
+    <div class="reference-ligne">
+      <span class="reference-etiquette">{{ t("conf_code", langue) }}</span>
+      <span class="reference-valeur" id="valeur-code">{{ code }}</span>
+    </div>
+
+    <div class="actions-references">
+      <button type="button" class="bouton-discret" id="bouton-copier"
+              data-succes="{{ t("conf_copie", langue) }}">
+        {{ t("conf_copier", langue) }}
+      </button>
+      <button type="button" class="bouton-discret" onclick="window.print()">
+        {{ t("conf_imprimer", langue) }}
+      </button>
+    </div>
+
+    <p class="reference-note">{{ t("conf_conserver", langue) }}</p>
+  </div>
   {% endif %}
 
   <p>{{ t("conf_texte", langue) }}</p>
@@ -23,4 +42,30 @@
     </a>
   </p>
 </div>
+
+<script>
+(function () {
+  const bouton = document.getElementById("bouton-copier");
+  if (!bouton) return;
+
+  bouton.addEventListener("click", function () {
+    const reference = document.getElementById("valeur-reference").textContent.trim();
+    const code = document.getElementById("valeur-code").textContent.trim();
+    const texte = "BeeHeard\n" +
+                  "{{ t("conf_reference", langue) }} : " + reference + "\n" +
+                  "{{ t("conf_code", langue) }} : " + code + "\n" +
+                  window.location.origin + "/mon-temoignage";
+
+    navigator.clipboard.writeText(texte).then(function () {
+      const initial = bouton.textContent;
+      bouton.textContent = bouton.dataset.succes;
+      bouton.classList.add("bouton-succes");
+      setTimeout(function () {
+        bouton.textContent = initial;
+        bouton.classList.remove("bouton-succes");
+      }, 2200);
+    });
+  });
+})();
+</script>
 {% endblock %}

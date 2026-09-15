@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block titre %}{{ t("retrait_titre", langue) }} - BeeHeard{% endblock %}
+
+{% block contenu %}
+<div class="confirmation">
+  <h1>{{ t("retrait_titre", langue) }}</h1>
+  <p>{{ t("retrait_texte", langue) }}</p>
+  <p class="confirmation-actions">
+    <a href="/" class="bouton">{{ t("conf_retour_accueil", langue) }}</a>
+  </p>
+</div>
+{% endblock %}

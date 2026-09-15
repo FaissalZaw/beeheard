@@ -109,6 +109,7 @@ class Contributeur(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     pseudonyme: Mapped[str] = mapped_column(String(50), unique=True)
+    empreinte_code: Mapped[str] = mapped_column(String(128))
     role: Mapped[RoleContributeur] = mapped_column(String(30))
     region: Mapped[str | None] = mapped_column(String(80))
     tranche_age: Mapped[str | None] = mapped_column(String(20))

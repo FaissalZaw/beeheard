@@ -17,6 +17,7 @@ from app.services.service_anonymisation import (
     appliquer_anonymisation,
     generer_pseudonyme,
 )
+from app.services.service_acces import calculer_empreinte, generer_code
 from app.services.service_titre import generer_titre
 
 TRANSITIONS_AUTORISEES: dict[StatutTemoignage, set[StatutTemoignage]] = {
@@ -59,8 +60,11 @@ class ServiceTemoignage:
             saisie.region, saisie.tranche_age, saisie.niveau_anonymisation
         )
 
+        code_acces = generer_code()
+
         contributeur = Contributeur(
             pseudonyme=generer_pseudonyme(),
+            empreinte_code=calculer_empreinte(code_acces),
             role=saisie.role,
             region=region,
             tranche_age=tranche_age,
@@ -98,7 +102,10 @@ class ServiceTemoignage:
             autorise_plaidoyer=saisie.autorise_plaidoyer,
         )
 
-        return self.depot.ajouter(temoignage)
+        temoignage = self.depot.ajouter(temoignage)
+        # Le code en clair n'est disponible qu'à cet instant, pour affichage
+        temoignage.code_acces_en_clair = code_acces
+        return temoignage
 
     def changer_statut(
         self, temoignage: Temoignage, nouveau_statut: StatutTemoignage

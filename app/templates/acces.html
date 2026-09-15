@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block titre %}{{ t("acces_titre", langue) }} - BeeHeard{% endblock %}
+
+{% block contenu %}
+<div class="acces-conteneur">
+  <h1>{{ t("acces_titre", langue) }}</h1>
+  <p class="intro">{{ t("acces_intro", langue) }}</p>
+
+  {% if erreur %}
+  <div class="alerte">{{ erreur }}</div>
+  {% endif %}
+
+  <form method="post" action="/mon-temoignage" class="formulaire-court">
+    <label for="reference">{{ t("acces_champ_reference", langue) }}</label>
+    <input type="text" name="reference" id="reference" required
+           value="{{ reference_saisie or "" }}"
+           placeholder="Contributeur-A47XK">
+
+    <label for="code">{{ t("acces_champ_code", langue) }}</label>
+    <input type="text" name="code" id="code" required
+           placeholder="XXXX-XXXX" autocomplete="off">
+
+    <button type="submit">{{ t("acces_bouton", langue) }}</button>
+  </form>
+
+  <div class="encart-note">
+    <p>{{ t("acces_note", langue) }}</p>
+  </div>
+</div>
+{% endblock %}

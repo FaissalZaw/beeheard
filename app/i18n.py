@@ -671,6 +671,208 @@ TRADUCTIONS.update({
     },
 })
 
+TRADUCTIONS.update({
+    "nav_mon_temoignage": {
+        "fr": "Mon témoignage", "en": "My account",
+        "de": "Mein Bericht", "it": "La mia testimonianza",
+    },
+    "acces_titre": {
+        "fr": "Retrouver mon témoignage", "en": "Retrieve my account",
+        "de": "Meinen Bericht abrufen", "it": "Ritrovare la mia testimonianza",
+    },
+    "acces_intro": {
+        "fr": "Saisissez la référence et le code personnel qui vous ont été "
+              "remis lors du dépôt. Ils vous permettent de consulter votre "
+              "témoignage, de modifier les usages autorisés ou de le retirer.",
+        "en": "Enter the reference and personal code provided when you "
+              "submitted your account. They allow you to view it, change the "
+              "permitted uses or withdraw it.",
+        "de": "Geben Sie die Referenz und den persönlichen Code ein, die Sie "
+              "beim Einreichen erhalten haben. Damit können Sie Ihren Bericht "
+              "einsehen, die erlaubten Verwendungen ändern oder ihn "
+              "zurückziehen.",
+        "it": "Inserisci il riferimento e il codice personale ricevuti al "
+              "momento dell'invio. Ti permettono di consultare la tua "
+              "testimonianza, modificare gli usi autorizzati o ritirarla.",
+    },
+    "acces_champ_reference": {
+        "fr": "Référence", "en": "Reference",
+        "de": "Referenz", "it": "Riferimento",
+    },
+    "acces_champ_code": {
+        "fr": "Code personnel", "en": "Personal code",
+        "de": "Persönlicher Code", "it": "Codice personale",
+    },
+    "acces_bouton": {
+        "fr": "Accéder à mon témoignage", "en": "Access my account",
+        "de": "Bericht aufrufen", "it": "Accedi alla mia testimonianza",
+    },
+    "acces_erreur": {
+        "fr": "Aucun témoignage ne correspond à ces références. Vérifiez la "
+              "référence et le code saisis.",
+        "en": "No account matches these details. Please check the reference "
+              "and code entered.",
+        "de": "Kein Bericht entspricht diesen Angaben. Bitte prüfen Sie "
+              "Referenz und Code.",
+        "it": "Nessuna testimonianza corrisponde a questi riferimenti. "
+              "Verifica il riferimento e il codice inseriti.",
+    },
+    "acces_note": {
+        "fr": "Le code personnel n'est conservé sous aucune forme lisible. En "
+              "cas de perte, il n'est pas possible de le retrouver ni de "
+              "récupérer l'accès au témoignage.",
+        "en": "The personal code is not stored in any readable form. If lost, "
+              "it cannot be recovered and access to the account cannot be "
+              "restored.",
+        "de": "Der persönliche Code wird in keiner lesbaren Form gespeichert. "
+              "Bei Verlust kann er nicht wiederhergestellt und der Zugang "
+              "nicht wiedererlangt werden.",
+        "it": "Il codice personale non è conservato in alcuna forma leggibile. "
+              "In caso di smarrimento, non è possibile recuperarlo né "
+              "riottenere l'accesso alla testimonianza.",
+    },
+    "acces_mon_titre": {
+        "fr": "Mon témoignage", "en": "My account",
+        "de": "Mein Bericht", "it": "La mia testimonianza",
+    },
+    "acces_depose_le": {
+        "fr": "Déposé le", "en": "Submitted on",
+        "de": "Eingereicht am", "it": "Inviata il",
+    },
+    "acces_statut": {
+        "fr": "Statut", "en": "Status", "de": "Status", "it": "Stato",
+    },
+    "statut_soumis": {
+        "fr": "En attente de validation", "en": "Awaiting review",
+        "de": "Wartet auf Prüfung", "it": "In attesa di convalida",
+    },
+    "statut_valide": {
+        "fr": "Validé", "en": "Validated", "de": "Geprüft", "it": "Convalidata",
+    },
+    "statut_publie": {
+        "fr": "Publié", "en": "Published",
+        "de": "Veröffentlicht", "it": "Pubblicata",
+    },
+    "statut_rejete": {
+        "fr": "Non retenu", "en": "Not retained",
+        "de": "Nicht berücksichtigt", "it": "Non accolta",
+    },
+    "statut_brouillon": {
+        "fr": "Brouillon", "en": "Draft", "de": "Entwurf", "it": "Bozza",
+    },
+    "acces_obstacles": {
+        "fr": "Obstacles signalés", "en": "Reported barriers",
+        "de": "Gemeldete Hindernisse", "it": "Ostacoli segnalati",
+    },
+    "acces_modifier_usages": {
+        "fr": "Modifier les usages autorisés", "en": "Change permitted uses",
+        "de": "Erlaubte Verwendungen ändern", "it": "Modificare gli usi autorizzati",
+    },
+    "acces_usages_note": {
+        "fr": "Le niveau d'anonymisation choisi lors du dépôt n'est pas "
+              "modifiable : appliqué dès la collecte, il a supprimé des "
+              "données qui ne peuvent être restaurées.",
+        "en": "The anonymisation level chosen at submission cannot be "
+              "changed: applied on collection, it removed data that cannot be "
+              "restored.",
+        "de": "Die bei der Einreichung gewählte Anonymisierungsstufe kann "
+              "nicht geändert werden: Sie wurde sofort angewendet und hat "
+              "Daten entfernt, die nicht wiederherstellbar sind.",
+        "it": "Il livello di anonimizzazione scelto al momento dell'invio non "
+              "è modificabile: applicato dalla raccolta, ha eliminato dati "
+              "che non possono essere ripristinati.",
+    },
+    "acces_enregistrer": {
+        "fr": "Enregistrer les modifications", "en": "Save changes",
+        "de": "Änderungen speichern", "it": "Salvare le modifiche",
+    },
+    "acces_modifie": {
+        "fr": "Vos préférences ont été enregistrées.",
+        "en": "Your preferences have been saved.",
+        "de": "Ihre Einstellungen wurden gespeichert.",
+        "it": "Le tue preferenze sono state salvate.",
+    },
+    "acces_retirer_titre": {
+        "fr": "Retirer mon témoignage", "en": "Withdraw my account",
+        "de": "Bericht zurückziehen", "it": "Ritirare la mia testimonianza",
+    },
+    "acces_retirer_texte": {
+        "fr": "Vous pouvez demander la suppression définitive de votre "
+              "témoignage. Cette action est irréversible et retire la "
+              "contribution de l'ensemble des données agrégées.",
+        "en": "You may request the permanent deletion of your account. This "
+              "action is irreversible and removes the contribution from all "
+              "aggregated data.",
+        "de": "Sie können die endgültige Löschung Ihres Berichts verlangen. "
+              "Dieser Schritt ist unwiderruflich und entfernt den Beitrag aus "
+              "allen aggregierten Daten.",
+        "it": "Puoi richiedere la cancellazione definitiva della tua "
+              "testimonianza. Questa azione è irreversibile e rimuove il "
+              "contributo da tutti i dati aggregati.",
+    },
+    "acces_retirer_bouton": {
+        "fr": "Supprimer définitivement", "en": "Delete permanently",
+        "de": "Endgültig löschen", "it": "Eliminare definitivamente",
+    },
+    "acces_retirer_confirmation": {
+        "fr": "Cette suppression est définitive. Confirmer ?",
+        "en": "This deletion is permanent. Confirm?",
+        "de": "Diese Löschung ist endgültig. Bestätigen?",
+        "it": "Questa eliminazione è definitiva. Confermare?",
+    },
+    "retrait_titre": {
+        "fr": "Témoignage supprimé", "en": "Account deleted",
+        "de": "Bericht gelöscht", "it": "Testimonianza eliminata",
+    },
+    "retrait_texte": {
+        "fr": "Votre témoignage a été définitivement supprimé. Il ne figure "
+              "plus dans les données agrégées.",
+        "en": "Your account has been permanently deleted. It no longer "
+              "appears in the aggregated data.",
+        "de": "Ihr Bericht wurde endgültig gelöscht. Er erscheint nicht mehr "
+              "in den aggregierten Daten.",
+        "it": "La tua testimonianza è stata definitivamente eliminata. Non "
+              "figura più nei dati aggregati.",
+    },
+    "conf_code": {
+        "fr": "Code personnel", "en": "Personal code",
+        "de": "Persönlicher Code", "it": "Codice personale",
+    },
+    "conf_conserver": {
+        "fr": "Conservez ces deux éléments. Ils vous permettront de retrouver "
+              "votre témoignage, de modifier les usages autorisés ou de le "
+              "retirer. Le code n'est affiché qu'une seule fois et ne peut pas "
+              "être régénéré.",
+        "en": "Keep both of these. They will let you retrieve your account, "
+              "change the permitted uses or withdraw it. The code is shown "
+              "only once and cannot be regenerated.",
+        "de": "Bewahren Sie beide Angaben auf. Damit können Sie Ihren Bericht "
+              "abrufen, die erlaubten Verwendungen ändern oder ihn "
+              "zurückziehen. Der Code wird nur einmal angezeigt und kann nicht "
+              "neu erzeugt werden.",
+        "it": "Conserva entrambi gli elementi. Ti permetteranno di ritrovare "
+              "la tua testimonianza, modificare gli usi autorizzati o "
+              "ritirarla. Il codice è mostrato una sola volta e non può essere "
+              "rigenerato.",
+    },
+})
+
+TRADUCTIONS.update({
+    "conf_copier": {
+        "fr": "Copier mes accès", "en": "Copy my details",
+        "de": "Zugangsdaten kopieren", "it": "Copia i miei accessi",
+    },
+    "conf_copie": {
+        "fr": "Copié", "en": "Copied", "de": "Kopiert", "it": "Copiato",
+    },
+    "conf_imprimer": {
+        "fr": "Imprimer ou enregistrer en PDF",
+        "en": "Print or save as PDF",
+        "de": "Drucken oder als PDF speichern",
+        "it": "Stampa o salva in PDF",
+    },
+})
+
 
 def traduire(cle: str, langue: str = "fr") -> str:
     """Retourne la chaîne traduite, avec repli sur le français."""

@@ -199,18 +199,26 @@ def enregistrer_temoignage(
         )
 
     return RedirectResponse(
-        url=f"/temoignage/confirmation?reference={temoignage.contributeur.pseudonyme}",
+        url=(
+            f"/temoignage/confirmation"
+            f"?reference={temoignage.contributeur.pseudonyme}"
+            f"&code={temoignage.code_acces_en_clair}"
+        ),
         status_code=303,
     )
 
 
 @routeur.get("/temoignage/confirmation", response_class=HTMLResponse)
 def afficher_confirmation(
-    request: Request, reference: str = ""
+    request: Request, reference: str = "", code: str = ""
 ) -> HTMLResponse:
-    """Confirme l'enregistrement et communique la référence du dépôt."""
+    """Confirme l'enregistrement et communique les références du dépôt."""
     return gabarits.TemplateResponse(
         request=request,
         name="confirmation.html",
-        context={"reference": reference, "donnees_fictives": DONNEES_FICTIVES},
+        context={
+            "reference": reference,
+            "code": code,
+            "donnees_fictives": DONNEES_FICTIVES,
+        },
     )

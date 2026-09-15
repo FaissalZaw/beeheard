@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block titre %}{{ t("acces_mon_titre", langue) }} - BeeHeard{% endblock %}
+
+{% block contenu %}
+<h1>{{ t("acces_mon_titre", langue) }}</h1>
+
+{% if message %}
+<div class="succes">{{ message }}</div>
+{% endif %}
+
+<section class="fiche">
+  <div class="fiche-entete">
+    <h2>{{ temoignage.titre }}</h2>
+    <p class="discret">
+      {{ t("acces_depose_le", langue) }}
+      {{ temoignage.date_soumission.strftime("%d.%m.%Y") }}
+      &middot; {{ t("acces_statut", langue) }} :
+      <strong>{{ t("statut_" ~ temoignage.statut, langue) }}</strong>
+    </p>
+  </div>
+
+  <p>{{ temoignage.recit }}</p>
+
+  <h3>{{ t("acces_obstacles", langue) }}</h3>
+  <ul>
+    {% for obstacle in temoignage.obstacles %}
+    <li>
+      {{ obstacle.type_obstacle.libelle_dans(langue_courante) }}
+      <span class="discret">
+        ({{ t("col_gravite", langue) | lower }} {{ obstacle.severite }}/5)
+      </span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section>
+  <h2>{{ t("acces_modifier_usages", langue) }}</h2>
+  <p class="aide">{{ t("acces_usages_note", langue) }}</p>
+
+  <form method="post" action="/mon-temoignage/consentements">
+    <input type="hidden" name="reference" value="{{ reference }}">
+    <input type="hidden" name="code" value="{{ code }}">
+
+    <label class="case-detaillee">
+      <input type="checkbox" name="autorise_publication" value="true"
+             {% if temoignage.consentement.autorise_publication %}checked{% endif %}>
+      <span class="option-corps">
+        <span class="option-titre">{{ t("usage_publication_titre", langue) }}</span>
+        <span class="option-description">{{ t("usage_publication_desc", langue) }}</span>
+      </span>
+    </label>
+
+    <label class="case-detaillee">
+      <input type="checkbox" name="autorise_plaidoyer" value="true"
+             {% if temoignage.consentement.autorise_plaidoyer %}checked{% endif %}>
+      <span class="option-corps">
+        <span class="option-titre">{{ t("usage_plaidoyer_titre", langue) }}</span>
+        <span class="option-description">{{ t("usage_plaidoyer_desc", langue) }}</span>
+      </span>
+    </label>
+
+    <button type="submit">{{ t("acces_enregistrer", langue) }}</button>
+  </form>
+</section>
+
+<section class="zone-retrait">
+  <h2>{{ t("acces_retirer_titre", langue) }}</h2>
+  <p>{{ t("acces_retirer_texte", langue) }}</p>
+
+  <form method="post" action="/mon-temoignage/retrait"
+        onsubmit="return confirm('{{ t("acces_retirer_confirmation", langue) }}');">
+    <input type="hidden" name="reference" value="{{ reference }}">
+    <input type="hidden" name="code" value="{{ code }}">
+    <button type="submit" class="bouton-danger">
+      {{ t("acces_retirer_bouton", langue) }}
+    </button>
+  </form>
+</section>
+{% endblock %}
