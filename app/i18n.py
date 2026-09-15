@@ -649,6 +649,28 @@ TRADUCTIONS.update({
     },
 })
 
+TRADUCTIONS.update({
+    "filtre_categorie": {
+        "fr": "Catégorie d'obstacle", "en": "Barrier category",
+        "de": "Hinderniskategorie", "it": "Categoria di ostacolo",
+    },
+    "filtre_region": {
+        "fr": "Canton", "en": "Canton", "de": "Kanton", "it": "Cantone",
+    },
+    "filtre_toutes": {
+        "fr": "Toutes les catégories", "en": "All categories",
+        "de": "Alle Kategorien", "it": "Tutte le categorie",
+    },
+    "filtre_toutes_regions": {
+        "fr": "Tous les cantons", "en": "All cantons",
+        "de": "Alle Kantone", "it": "Tutti i cantoni",
+    },
+    "filtre_reinitialiser": {
+        "fr": "Réinitialiser", "en": "Reset",
+        "de": "Zurücksetzen", "it": "Reimposta",
+    },
+})
+
 
 def traduire(cle: str, langue: str = "fr") -> str:
     """Retourne la chaîne traduite, avec repli sur le français."""

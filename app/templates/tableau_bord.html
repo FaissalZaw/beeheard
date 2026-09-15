@@ -5,6 +5,41 @@
 <h1>{{ t("tdb_titre", langue) }}</h1>
 <p class="intro">{{ t("tdb_intro", langue) }}</p>
 
+<form method="get" action="/tableau-de-bord" class="barre-filtres">
+  <div class="filtre">
+    <label for="filtre-categorie">{{ t("filtre_categorie", langue) }}</label>
+    <select name="categorie" id="filtre-categorie" onchange="this.form.submit()">
+      <option value="">{{ t("filtre_toutes", langue) }}</option>
+      {% for categorie in categories_disponibles %}
+      <option value="{{ categorie.code }}"
+              {% if categorie.code == categorie_active %}selected{% endif %}>
+        {{ categorie.libelle_dans(langue_courante) }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="filtre">
+    <label for="filtre-region">{{ t("filtre_region", langue) }}</label>
+    <select name="region" id="filtre-region" onchange="this.form.submit()">
+      <option value="">{{ t("filtre_toutes_regions", langue) }}</option>
+      {% for region in regions_disponibles %}
+      <option value="{{ region }}"
+              {% if region == region_active %}selected{% endif %}>
+        {{ region }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  {% if categorie_active or region_active %}
+  <a href="/tableau-de-bord" class="reinitialiser">
+    {{ t("filtre_reinitialiser", langue) }}
+  </a>
+  {% endif %}
+</form>
+
+
 <div class="indicateurs">
   <div class="indicateur">
     <span class="valeur">{{ synthese.nombre_temoignages }}</span>

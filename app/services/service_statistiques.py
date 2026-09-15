@@ -28,25 +28,65 @@ class ServiceStatistiques:
 
     STATUTS_RETENUS = (StatutTemoignage.VALIDE, StatutTemoignage.PUBLIE)
 
-    def __init__(self, session: Session, langue: str = "fr") -> None:
+    def __init__(
+        self,
+        session: Session,
+        langue: str = "fr",
+        categorie: str | None = None,
+        region: str | None = None,
+    ) -> None:
         self.session = session
         self.langue = langue
+        self.categorie = categorie or None
+        self.region = region or None
 
     def _filtre_statut(self):
         """Restreint l'analyse aux témoignages validés ou publiés."""
         return Temoignage.statut.in_([s.value for s in self.STATUTS_RETENUS])
 
+    def _conditions(self) -> list:
+        """Assemble les conditions de filtrage actives."""
+        conditions = [self._filtre_statut()]
+        if self.categorie:
+            conditions.append(CategorieObstacle.code == self.categorie)
+        if self.region:
+            conditions.append(Contributeur.region == self.region)
+        return conditions
+
+    @property
+    def filtres_actifs(self) -> dict:
+        """Décrit les filtres appliqués, pour affichage."""
+        return {"categorie": self.categorie, "region": self.region}
+
     def compter_temoignages(self) -> int:
         """Nombre de témoignages retenus pour l'analyse."""
-        requete = select(func.count(Temoignage.id)).where(self._filtre_statut())
+        requete = (
+            select(func.count(func.distinct(Temoignage.id)))
+            .select_from(Temoignage)
+            .join(Contributeur, Temoignage.contributeur_id == Contributeur.id)
+            .outerjoin(ObstacleSignale, ObstacleSignale.temoignage_id == Temoignage.id)
+            .outerjoin(
+                TypeObstacle, ObstacleSignale.type_obstacle_id == TypeObstacle.id
+            )
+            .outerjoin(
+                CategorieObstacle, TypeObstacle.categorie_id == CategorieObstacle.id
+            )
+            .where(*self._conditions())
+        )
         return self.session.execute(requete).scalar_one()
 
     def compter_obstacles(self) -> int:
         """Nombre total d'obstacles signalés."""
         requete = (
             select(func.count(ObstacleSignale.id))
-            .join(Temoignage)
-            .where(self._filtre_statut())
+            .select_from(ObstacleSignale)
+            .join(Temoignage, ObstacleSignale.temoignage_id == Temoignage.id)
+            .join(Contributeur, Temoignage.contributeur_id == Contributeur.id)
+            .join(TypeObstacle, ObstacleSignale.type_obstacle_id == TypeObstacle.id)
+            .join(
+                CategorieObstacle, TypeObstacle.categorie_id == CategorieObstacle.id
+            )
+            .where(*self._conditions())
         )
         return self.session.execute(requete).scalar_one()
 
@@ -67,12 +107,13 @@ class ServiceStatistiques:
             .join(TypeObstacle, ObstacleSignale.type_obstacle_id == TypeObstacle.id)
             .join(CategorieObstacle, TypeObstacle.categorie_id == CategorieObstacle.id)
             .join(Temoignage, ObstacleSignale.temoignage_id == Temoignage.id)
+            .join(Contributeur, Temoignage.contributeur_id == Contributeur.id)
             .outerjoin(
                 TraductionCategorie,
                 (TraductionCategorie.categorie_id == CategorieObstacle.id)
                 & (TraductionCategorie.langue == self.langue),
             )
-            .where(self._filtre_statut())
+            .where(*self._conditions())
             .group_by(
                 func.coalesce(
                     TraductionCategorie.libelle, CategorieObstacle.libelle
@@ -114,12 +155,13 @@ class ServiceStatistiques:
                 (TraductionType.type_obstacle_id == TypeObstacle.id)
                 & (TraductionType.langue == self.langue),
             )
+            .join(Contributeur, Temoignage.contributeur_id == Contributeur.id)
             .outerjoin(
                 TraductionCategorie,
                 (TraductionCategorie.categorie_id == CategorieObstacle.id)
                 & (TraductionCategorie.langue == self.langue),
             )
-            .where(self._filtre_statut())
+            .where(*self._conditions())
             .group_by(
                 func.coalesce(TraductionType.libelle, TypeObstacle.libelle),
                 func.coalesce(
@@ -148,7 +190,14 @@ class ServiceStatistiques:
             select(Contributeur.role, func.count(Temoignage.id))
             .select_from(Temoignage)
             .join(Contributeur, Temoignage.contributeur_id == Contributeur.id)
-            .where(self._filtre_statut())
+            .outerjoin(ObstacleSignale, ObstacleSignale.temoignage_id == Temoignage.id)
+            .outerjoin(
+                TypeObstacle, ObstacleSignale.type_obstacle_id == TypeObstacle.id
+            )
+            .outerjoin(
+                CategorieObstacle, TypeObstacle.categorie_id == CategorieObstacle.id
+            )
+            .where(*self._conditions())
             .group_by(Contributeur.role)
             .order_by(func.count(Temoignage.id).desc())
         )
@@ -161,8 +210,14 @@ class ServiceStatistiques:
         """Durée moyenne, en jours, des blocages renseignés."""
         requete = (
             select(func.avg(ObstacleSignale.duree_jours))
-            .join(Temoignage)
-            .where(self._filtre_statut())
+            .select_from(ObstacleSignale)
+            .join(Temoignage, ObstacleSignale.temoignage_id == Temoignage.id)
+            .join(Contributeur, Temoignage.contributeur_id == Contributeur.id)
+            .join(TypeObstacle, ObstacleSignale.type_obstacle_id == TypeObstacle.id)
+            .join(
+                CategorieObstacle, TypeObstacle.categorie_id == CategorieObstacle.id
+            )
+            .where(*self._conditions())
             .where(ObstacleSignale.duree_jours.isnot(None))
         )
         moyenne = self.session.execute(requete).scalar_one_or_none()
@@ -177,4 +232,5 @@ class ServiceStatistiques:
             "obstacles_frequents": self.obstacles_les_plus_signales(),
             "par_role": self.repartition_par_role(),
             "duree_moyenne_blocage": self.duree_moyenne_blocage(),
+            "filtres": self.filtres_actifs,
         }
