@@ -60,7 +60,7 @@ def test_sonde_de_sante(client: TestClient) -> None:
 
 
 def test_tableau_de_bord_est_accessible(client: TestClient) -> None:
-    reponse = client.get("/")
+    reponse = client.get("/tableau-de-bord")
     assert reponse.status_code == 200
     assert "Obstacles d'accès aux traitements" in reponse.text
 
@@ -88,7 +88,8 @@ def test_depot_complet_redirige_vers_la_confirmation(client: TestClient) -> None
         follow_redirects=False,
     )
     assert reponse.status_code == 303
-    assert reponse.headers["location"] == "/temoignage/confirmation"
+    assert reponse.headers["location"].startswith("/temoignage/confirmation")
+    assert "reference=Contributeur-" in reponse.headers["location"]
 
 
 def test_depot_sans_consentement_est_refuse(client: TestClient) -> None:

@@ -24,14 +24,15 @@ class TemoignageSaisi(BaseModel):
     tranche_age: str | None = None
 
     maladie_id: int
-    titre: str = Field(min_length=5, max_length=200)
-    recit: str = Field(min_length=20)
+    titre: str | None = Field(default=None, max_length=200)
+    recit: str = Field(min_length=30, max_length=3000)
     date_evenement: date | None = None
     langue: str = Field(default="fr", max_length=5)
 
     obstacles: list[ObstacleSaisi] = Field(min_length=1)
 
     niveau_anonymisation: NiveauAnonymisation = NiveauAnonymisation.COMPLET
+    autorise_statistiques: bool = True
     autorise_publication: bool = False
     autorise_plaidoyer: bool = False
     consentement_donne: bool

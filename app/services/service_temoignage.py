@@ -17,6 +17,7 @@ from app.services.service_anonymisation import (
     appliquer_anonymisation,
     generer_pseudonyme,
 )
+from app.services.service_titre import generer_titre
 
 TRANSITIONS_AUTORISEES: dict[StatutTemoignage, set[StatutTemoignage]] = {
     StatutTemoignage.BROUILLON: {StatutTemoignage.SOUMIS},
@@ -66,10 +67,14 @@ class ServiceTemoignage:
         )
         self.depot.ajouter_contributeur(contributeur)
 
+        titre = saisie.titre.strip() if saisie.titre else ""
+        if not titre:
+            titre = generer_titre(saisie.recit)
+
         temoignage = Temoignage(
             contributeur_id=contributeur.id,
             maladie_id=saisie.maladie_id,
-            titre=saisie.titre,
+            titre=titre,
             recit=saisie.recit,
             date_evenement=saisie.date_evenement,
             langue=saisie.langue,

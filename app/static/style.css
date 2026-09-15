@@ -500,3 +500,273 @@ section p {
   .pied-contenu { flex-direction: column; align-items: flex-start; }
   .pied-liens a { margin: 0 18px 0 0; }
 }
+
+/* ── Formulaire enrichi ─────────────────────────────── */
+
+.facultatif {
+  font-weight: 400;
+  font-size: 12.5px;
+  color: var(--discret);
+  font-style: italic;
+  margin-left: 4px;
+}
+
+.etiquette-groupe {
+  display: block;
+  margin: 22px 0 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.champs-cote {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.champs-cote > div {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Zone de récit */
+.zone-recit {
+  position: relative;
+}
+
+.barre-recit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.compteur {
+  font-size: 13px;
+  color: var(--discret);
+  margin-left: auto;
+}
+
+.compteur-insuffisant { color: #b45309; }
+.compteur-limite { color: var(--alerte); }
+
+.bouton-discret {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--bord);
+  border-radius: 6px;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+.bouton-discret:hover { background: var(--accent-clair); }
+.bouton-discret:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.icone-micro { font-size: 10px; }
+
+.dictee-active {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: var(--alerte);
+}
+
+.dictee-active .icone-micro {
+  animation: pulsation 1.4s ease-in-out infinite;
+}
+
+@keyframes pulsation {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* Catégories pliantes */
+.categorie-pliante {
+  border: 1px solid var(--bord);
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.categorie-pliante summary {
+  padding: 12px 15px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+}
+
+.categorie-pliante summary::-webkit-details-marker { display: none; }
+
+.categorie-pliante summary::before {
+  content: "›";
+  display: inline-block;
+  font-size: 17px;
+  color: var(--discret);
+  transition: transform 0.15s ease;
+}
+
+.categorie-pliante[open] summary::before { transform: rotate(90deg); }
+.categorie-pliante summary:hover { background: var(--accent-clair); }
+
+.compte-types {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--discret);
+  background: var(--accent-clair);
+  padding: 2px 9px;
+  border-radius: 10px;
+}
+
+.categorie-contenu {
+  padding: 4px 15px 14px 38px;
+}
+
+/* Échelle de gravité */
+.echelle-gravite {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.graduation {
+  flex: 1;
+  min-width: 128px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.graduation input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+}
+
+.graduation-corps {
+  display: block;
+  padding: 12px 11px;
+  border: 1px solid var(--bord);
+  border-radius: 6px;
+  text-align: center;
+  transition: all 0.12s ease;
+  height: 100%;
+}
+
+.graduation-titre {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.graduation-description {
+  display: block;
+  font-size: 11.5px;
+  color: var(--discret);
+  line-height: 1.35;
+}
+
+.graduation input:checked + .graduation-corps {
+  border-color: var(--accent);
+  background: var(--accent-clair);
+}
+
+.graduation input:focus-visible + .graduation-corps {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.graduation:hover .graduation-corps { border-color: var(--accent); }
+
+/* Options détaillées */
+.options-radio {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.option-detaillee,
+.case-detaillee {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 13px 15px;
+  border: 1px solid var(--bord);
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0 0 9px;
+  font-weight: 400;
+  transition: border-color 0.12s ease;
+}
+
+.option-detaillee:hover,
+.case-detaillee:hover { border-color: var(--accent); }
+
+.option-detaillee input,
+.case-detaillee input {
+  width: auto;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.option-detaillee:has(input:checked),
+.case-detaillee:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-clair);
+}
+
+.option-corps { display: block; }
+
+.option-titre {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.option-description {
+  display: block;
+  font-size: 13px;
+  color: var(--discret);
+  line-height: 1.45;
+}
+
+.case.obligatoire {
+  margin-top: 20px;
+  padding: 15px;
+  background: var(--accent-clair);
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.case.obligatoire a { color: var(--accent); }
+
+@media (max-width: 720px) {
+  .echelle-gravite { flex-direction: column; }
+  .graduation-corps { text-align: left; }
+}
+
+.reference {
+  display: inline-block;
+  padding: 9px 18px;
+  background: var(--accent-clair);
+  border-radius: 6px;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}

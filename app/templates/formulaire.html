@@ -4,44 +4,58 @@
 {% block contenu %}
 <h1>Déposer un témoignage</h1>
 <p class="intro">
-  Ce formulaire permet de documenter les obstacles rencontrés dans l'accès
-  à un traitement. Votre témoignage sera anonymisé selon le niveau que vous
-  choisissez et ne sera publié qu'après validation.
+  Ce formulaire permet de documenter les obstacles rencontrés dans l'accès à
+  un traitement. Aucune donnée permettant de vous identifier n'est collectée.
+  Vous choisissez le niveau d'anonymisation et les usages autorisés.
 </p>
 
 {% if erreur %}
 <div class="alerte">{{ erreur }}</div>
 {% endif %}
 
-<form method="post" action="/temoignage">
+<form method="post" action="/temoignage" id="formulaire-temoignage">
 
   <fieldset>
     <legend>Qui témoigne</legend>
 
     <label for="role">En quelle qualité témoignez-vous ?</label>
     <select name="role" id="role" required>
-      {% for role in roles %}
-      <option value="{{ role.value }}">{{ role.value | capitalize }}</option>
+      {% for valeur, libelle in roles %}
+      <option value="{{ valeur }}">{{ libelle }}</option>
       {% endfor %}
     </select>
 
-    <label for="region">Canton ou région (facultatif)</label>
-    <input type="text" name="region" id="region" placeholder="Genève">
-
-    <label for="tranche_age">Tranche d'âge (facultatif)</label>
-    <select name="tranche_age" id="tranche_age">
-      <option value="">Non renseigné</option>
-      <option value="moins de 18">Moins de 18 ans</option>
-      <option value="18-29">18 à 29 ans</option>
-      <option value="30-39">30 à 39 ans</option>
-      <option value="40-49">40 à 49 ans</option>
-      <option value="50-59">50 à 59 ans</option>
-      <option value="60 et plus">60 ans et plus</option>
-    </select>
+    <div class="champs-cote">
+      <div>
+        <label for="region">Canton <span class="facultatif">facultatif</span></label>
+        <select name="region" id="region">
+          <option value="">Non renseigné</option>
+          {% for canton in cantons %}
+          <option value="{{ canton }}">{{ canton }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label for="tranche_age">Tranche d'âge <span class="facultatif">facultatif</span></label>
+        <select name="tranche_age" id="tranche_age">
+          <option value="">Non renseigné</option>
+          <option value="moins de 18">Moins de 18 ans</option>
+          <option value="18-29">18 à 29 ans</option>
+          <option value="30-39">30 à 39 ans</option>
+          <option value="40-49">40 à 49 ans</option>
+          <option value="50-59">50 à 59 ans</option>
+          <option value="60 et plus">60 ans et plus</option>
+        </select>
+      </div>
+    </div>
+    <p class="aide">
+      Ces deux informations ne sont conservées que si vous choisissez un
+      niveau d'anonymisation qui le permet, à la dernière étape.
+    </p>
   </fieldset>
 
   <fieldset>
-    <legend>Le témoignage</legend>
+    <legend>Votre témoignage</legend>
 
     <label for="maladie_id">Pathologie concernée</label>
     <select name="maladie_id" id="maladie_id" required>
@@ -50,78 +64,182 @@
       {% endfor %}
     </select>
 
-    <label for="titre">Titre</label>
-    <input type="text" name="titre" id="titre" required minlength="5"
-           placeholder="Résumez votre situation en une phrase">
+    <label for="recit">
+      Décrivez la situation que vous avez vécue
+    </label>
+    <div class="zone-recit">
+      <textarea
+        name="recit" id="recit" rows="10"
+        required minlength="30" maxlength="3000"
+        placeholder="Racontez librement : ce qui s'est passé, les démarches entreprises, les réponses obtenues, les conséquences."></textarea>
 
-    <label for="recit">Votre récit</label>
-    <textarea name="recit" id="recit" rows="8" required minlength="20"
-              placeholder="Décrivez librement ce que vous avez vécu."></textarea>
+      <div class="barre-recit">
+        <button type="button" id="bouton-dictee" class="bouton-discret" hidden>
+          <span class="icone-micro" aria-hidden="true">●</span>
+          <span id="libelle-dictee">Dicter</span>
+        </button>
+        <span class="compteur" id="compteur-recit">0 / 3000 caractères</span>
+      </div>
+    </div>
 
-    <label for="date_evenement">Date de l'événement (facultatif)</label>
+    <label for="titre">
+      Titre <span class="facultatif">facultatif</span>
+    </label>
+    <input
+      type="text" name="titre" id="titre" maxlength="200"
+      placeholder="Laissez vide : un titre sera proposé à partir de votre récit">
+    <p class="aide">
+      Si vous ne renseignez rien, un intitulé sera généré automatiquement en
+      reprenant le début de votre récit.
+    </p>
+
+    <label for="date_evenement">
+      Date de l'événement <span class="facultatif">facultatif</span>
+    </label>
     <input type="date" name="date_evenement" id="date_evenement">
   </fieldset>
 
   <fieldset>
     <legend>Obstacles rencontrés</legend>
     <p class="aide">
-      Sélectionnez les obstacles qui correspondent à votre situation.
-      Cette qualification permet de rendre les témoignages comparables.
+      Sélectionnez les obstacles qui correspondent à votre situation. Cette
+      qualification permet de rendre les témoignages comparables et d'en tirer
+      des indicateurs. Plusieurs choix sont possibles.
     </p>
 
     {% for categorie in categories %}
-    <div class="categorie">
-      <h3>{{ categorie.libelle }}</h3>
-      {% for type in categorie.types %}
-      <label class="case">
-        <input type="checkbox" name="obstacles" value="{{ type.id }}">
-        {{ type.libelle }}
+    <details class="categorie-pliante" {% if loop.first %}open{% endif %}>
+      <summary>
+        {{ categorie.libelle }}
+        <span class="compte-types">{{ categorie.types | length }}</span>
+      </summary>
+      <div class="categorie-contenu">
+        {% for type in categorie.types %}
+        <label class="case">
+          <input type="checkbox" name="obstacles" value="{{ type.id }}">
+          {{ type.libelle }}
+        </label>
+        {% endfor %}
+      </div>
+    </details>
+    {% endfor %}
+
+    <label class="etiquette-groupe">Gravité ressentie de la situation</label>
+    <div class="echelle-gravite">
+      {% for valeur, libelle, description in niveaux_gravite %}
+      <label class="graduation">
+        <input
+          type="radio" name="severite" value="{{ valeur }}"
+          {% if valeur == 3 %}checked{% endif %}>
+        <span class="graduation-corps">
+          <span class="graduation-titre">{{ libelle }}</span>
+          <span class="graduation-description">{{ description }}</span>
+        </span>
       </label>
       {% endfor %}
     </div>
-    {% endfor %}
 
-    <label for="severite">Gravité ressentie (1 à 5)</label>
-    <input type="range" name="severite" id="severite" min="1" max="5" value="3">
-
-    <label for="duree_jours">Durée du blocage en jours (facultatif)</label>
-    <input type="number" name="duree_jours" id="duree_jours" min="0"
-           placeholder="Par exemple 240">
+    <label for="duree_jours">
+      Durée du blocage en jours <span class="facultatif">facultatif</span>
+    </label>
+    <input
+      type="number" name="duree_jours" id="duree_jours" min="0" max="3650"
+      placeholder="Par exemple 240 pour huit mois d'attente">
   </fieldset>
 
   <fieldset>
-    <legend>Consentement et anonymisation</legend>
+    <legend>Anonymisation</legend>
+    <p class="aide">
+      Ce choix est appliqué au moment de l'enregistrement et ne peut pas être
+      modifié ensuite.
+    </p>
 
-    <label for="niveau_anonymisation">Niveau d'anonymisation souhaité</label>
-    <select name="niveau_anonymisation" id="niveau_anonymisation">
-      <option value="complet">
-        Complet : aucune donnée de contexte n'est conservée
-      </option>
-      <option value="partiel">
-        Partiel : seule la région est conservée
-      </option>
-      <option value="identifie">
-        Étendu : région et tranche d'âge sont conservées
-      </option>
-    </select>
+    <div class="options-radio">
+      <label class="option-detaillee">
+        <input type="radio" name="niveau_anonymisation" value="complet" checked>
+        <span class="option-corps">
+          <span class="option-titre">Anonymisation complète</span>
+          <span class="option-description">
+            Ni canton ni tranche d'âge ne sont conservés. Recommandé.
+          </span>
+        </span>
+      </label>
+      <label class="option-detaillee">
+        <input type="radio" name="niveau_anonymisation" value="partiel">
+        <span class="option-corps">
+          <span class="option-titre">Anonymisation partielle</span>
+          <span class="option-description">
+            Le canton est conservé, la tranche d'âge est supprimée.
+          </span>
+        </span>
+      </label>
+      <label class="option-detaillee">
+        <input type="radio" name="niveau_anonymisation" value="identifie">
+        <span class="option-corps">
+          <span class="option-titre">Anonymisation étendue</span>
+          <span class="option-description">
+            Canton et tranche d'âge sont conservés, permettant des analyses
+            plus fines.
+          </span>
+        </span>
+      </label>
+    </div>
+  </fieldset>
 
-    <label class="case">
-      <input type="checkbox" name="autorise_publication" value="true">
-      J'autorise la publication de mon témoignage sous forme anonymisée
+  <fieldset>
+    <legend>Usages autorisés</legend>
+    <p class="aide">
+      Chaque usage fait l'objet d'un accord distinct. Aucun n'est activé par
+      défaut, à l'exception du comptage statistique.
+    </p>
+
+    <label class="case-detaillee">
+      <input type="checkbox" name="autorise_statistiques" value="true" checked>
+      <span class="option-corps">
+        <span class="option-titre">Statistiques agrégées</span>
+        <span class="option-description">
+          Votre témoignage alimente des comptages et des répartitions. Le
+          récit lui-même n'est pas affiché.
+        </span>
+      </span>
     </label>
 
-    <label class="case">
+    <label class="case-detaillee">
+      <input type="checkbox" name="autorise_publication" value="true">
+      <span class="option-corps">
+        <span class="option-titre">Publication anonymisée</span>
+        <span class="option-description">
+          Votre récit peut être affiché dans l'espace de consultation, sous
+          pseudonyme.
+        </span>
+      </span>
+    </label>
+
+    <label class="case-detaillee">
       <input type="checkbox" name="autorise_plaidoyer" value="true">
-      J'autorise son utilisation dans des supports de plaidoyer
+      <span class="option-corps">
+        <span class="option-titre">Supports de plaidoyer</span>
+        <span class="option-description">
+          Votre récit peut être repris dans des documents destinés aux
+          associations, aux organisations de santé ou aux décideurs.
+        </span>
+      </span>
     </label>
 
     <label class="case obligatoire">
       <input type="checkbox" name="consentement_donne" value="true" required>
-      Je consens au traitement des informations que je transmets, conformément
-      à la Loi fédérale sur la protection des données
+      <span>
+        Je consens au traitement des informations que je transmets,
+        conformément à la Loi fédérale sur la protection des données. J'ai pris
+        connaissance de la
+        <a href="/protection-des-donnees" target="_blank">politique de
+        protection des données</a>.
+      </span>
     </label>
   </fieldset>
 
-  <button type="submit">Envoyer le témoignage</button>
+  <button type="submit">Envoyer mon témoignage</button>
 </form>
+
+<script src="/static/formulaire.js" defer></script>
 {% endblock %}
