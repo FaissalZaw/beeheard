@@ -29,34 +29,46 @@ TRADUCTIONS: dict[str, dict[str, str]] = {
     },
 
     # Accueil
-    "accueil_titre": {
-        "fr": "Rendre visibles les obstacles d'accès aux traitements",
-        "en": "Making barriers to treatment access visible",
-        "de": "Zugangshindernisse zu Behandlungen sichtbar machen",
-        "it": "Rendere visibili gli ostacoli all'accesso alle cure",
+    "accueil_titre_avant": {
+        "fr": "Rendre", "en": "Making barriers to care and treatment",
+        "de": "Hindernisse beim Zugang zu Versorgung und Behandlung",
+        "it": "Rendere",
+    },
+    "accueil_titre_accent": {
+        "fr": "visibles", "en": "visible",
+        "de": "sichtbar", "it": "visibili",
+    },
+    "accueil_titre_apres": {
+        "fr": "les obstacles d'accès aux soins et aux traitements",
+        "en": "", "de": " machen",
+        "it": "gli ostacoli all'accesso alle cure e ai trattamenti",
     },
     "accueil_intro": {
-        "fr": "Des traitements existent et sont autorisés, mais n'atteignent "
-              "pas toujours les personnes qui en ont besoin. Les obstacles "
-              "rencontrés sont rarement documentés de manière structurée, ce "
-              "qui les rend invisibles pour ceux qui décident. BeeHeard "
-              "recueille ces situations et les transforme en données "
-              "exploitables.",
-        "en": "Treatments exist and are authorised, yet they do not always "
-              "reach the people who need them. The barriers encountered are "
-              "rarely documented in a structured way, which makes them "
-              "invisible to decision-makers. BeeHeard collects these "
-              "situations and turns them into usable data.",
-        "de": "Behandlungen existieren und sind zugelassen, erreichen aber "
-              "nicht immer die Menschen, die sie benötigen. Die auftretenden "
-              "Hindernisse werden selten strukturiert dokumentiert und "
-              "bleiben für Entscheidungsträger unsichtbar. BeeHeard erfasst "
-              "diese Situationen und wandelt sie in verwertbare Daten um.",
-        "it": "I trattamenti esistono e sono autorizzati, ma non raggiungono "
-              "sempre le persone che ne hanno bisogno. Gli ostacoli incontrati "
-              "sono raramente documentati in modo strutturato, il che li rende "
-              "invisibili a chi decide. BeeHeard raccoglie queste situazioni e "
-              "le trasforma in dati utilizzabili.",
+        "fr": "Des soins sont prévus, des médicaments et des traitements "
+              "existent et sont autorisés, mais ils ne parviennent pas "
+              "toujours jusqu'aux personnes qui en ont besoin. Ces ruptures "
+              "dans la prise en charge sont rarement documentées de manière "
+              "structurée, ce qui les rend invisibles pour les décideurs. "
+              "BeeHeard recueille ces situations vécues et les transforme en "
+              "données exploitables.",
+        "en": "Care pathways are planned, medicines and treatments exist and "
+              "are authorised, yet they do not always reach the people who "
+              "need them. These breakdowns in care are rarely documented in a "
+              "structured way, which makes them invisible to decision-makers. "
+              "BeeHeard collects these lived situations and turns them into "
+              "usable data.",
+        "de": "Versorgungsangebote bestehen, Medikamente und Behandlungen "
+              "existieren und sind zugelassen, erreichen aber nicht immer die "
+              "Menschen, die sie benötigen. Diese Brüche in der Versorgung "
+              "werden selten strukturiert dokumentiert und bleiben für "
+              "Entscheidungsträger unsichtbar. BeeHeard erfasst diese erlebten "
+              "Situationen und wandelt sie in verwertbare Daten um.",
+        "it": "Le cure sono previste, i medicinali e i trattamenti esistono e "
+              "sono autorizzati, ma non raggiungono sempre le persone che ne "
+              "hanno bisogno. Queste rotture nella presa in carico sono "
+              "raramente documentate in modo strutturato, il che le rende "
+              "invisibili a chi decide. BeeHeard raccoglie queste situazioni "
+              "vissute e le trasforma in dati utilizzabili.",
     },
     "accueil_bouton_temoigner": {
         "fr": "Déposer un témoignage", "en": "Submit an account",
@@ -150,10 +162,10 @@ TRADUCTIONS: dict[str, dict[str, str]] = {
 
     # Tableau de bord
     "tdb_titre": {
-        "fr": "Obstacles d'accès aux traitements",
-        "en": "Barriers to treatment access",
-        "de": "Hindernisse beim Zugang zu Behandlungen",
-        "it": "Ostacoli all'accesso alle cure",
+        "fr": "Obstacles d'accès aux soins et aux traitements",
+        "en": "Barriers to care and treatment access",
+        "de": "Hindernisse beim Zugang zu Versorgung und Behandlung",
+        "it": "Ostacoli all'accesso alle cure e ai trattamenti",
     },
     "tdb_intro": {
         "fr": "Indicateurs agrégés issus des témoignages validés.",
@@ -211,8 +223,8 @@ TRADUCTIONS: dict[str, dict[str, str]] = {
     },
     "form_intro": {
         "fr": "Ce formulaire permet de documenter les obstacles rencontrés "
-              "dans l'accès à un traitement. Aucune donnée permettant de vous "
-              "identifier n'est collectée.",
+              "dans l'accès aux soins ou à un traitement. Aucune donnée "
+              "permettant de vous identifier n'est collectée.",
         "en": "This form documents barriers encountered in accessing "
               "treatment. No personally identifying data is collected.",
         "de": "Dieses Formular dokumentiert Hindernisse beim Zugang zu einer "
@@ -515,10 +527,10 @@ TRADUCTIONS.update({
 TRADUCTIONS.update({
     # Fiche de synthèse
     "synth_titre": {
-        "fr": "Obstacles d'accès aux traitements",
-        "en": "Barriers to treatment access",
-        "de": "Hindernisse beim Zugang zu Behandlungen",
-        "it": "Ostacoli all'accesso alle cure",
+        "fr": "Obstacles d'accès aux soins et aux traitements",
+        "en": "Barriers to care and treatment access",
+        "de": "Hindernisse beim Zugang zu Versorgung und Behandlung",
+        "it": "Ostacoli all'accesso alle cure e ai trattamenti",
     },
     "synth_generee": {
         "fr": "Fiche de synthèse générée le",

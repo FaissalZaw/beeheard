@@ -3,7 +3,11 @@
 
 {% block contenu %}
 <section class="hero">
-  <h1>{{ t("accueil_titre", langue) }}</h1>
+  <h1>
+    {{ t("accueil_titre_avant", langue) }}
+    <span class="mot-accent">{{ t("accueil_titre_accent", langue) }}</span>
+    {{ t("accueil_titre_apres", langue) }}
+  </h1>
   <p class="hero-texte">{{ t("accueil_intro", langue) }}</p>
 
   <div class="hero-actions">

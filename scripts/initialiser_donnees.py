@@ -75,6 +75,8 @@ TYPES_OBSTACLES = [
     ("organisationnel", "medecine_defensive", "Décision guidée par la prudence institutionnelle plutôt que par le besoin"),
     ("organisationnel", "deni_institutionnel", "Déni du problème par l'institution sollicitée"),
     ("organisationnel", "blocage_politique", "Blocage lié à un désaccord entre institutions ou acteurs"),
+    ("organisationnel", "rupture_approvisionnement", "Rupture d'approvisionnement en médicament, produit sanguin ou matériel médical"),
+    ("organisationnel", "complexite_administrative", "Complexité administrative des démarches à accomplir"),
     # Informationnels
     ("informationnel", "information_indisponible", "Information non disponible sur les options de traitement"),
     ("informationnel", "procedure_opaque", "Procédure de demande peu claire ou non documentée"),

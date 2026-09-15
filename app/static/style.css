@@ -1007,3 +1007,43 @@ section p {
     margin-bottom: 18px;
   }
 }
+
+/* ── Mot mis en evidence dans le titre d'accueil ─────── */
+
+.hero h1 {
+  font-weight: 500;
+}
+
+.mot-accent {
+  position: relative;
+  color: var(--accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.mot-accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.1em;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    var(--accent) 72%,
+    rgba(31, 78, 121, 0.25) 100%
+  );
+  transform-origin: left center;
+  animation: tracer-trait 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+@keyframes tracer-trait {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mot-accent::after { animation: none; }
+}

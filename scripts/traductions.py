@@ -135,6 +135,16 @@ TRADUCTIONS_TYPES = {
         "de": "Blockade durch Uneinigkeit zwischen Institutionen oder Akteuren",
         "it": "Blocco dovuto a disaccordo tra istituzioni o attori",
     },
+    "rupture_approvisionnement": {
+        "en": "Supply shortage of medicine, blood product or medical equipment",
+        "de": "Lieferengpass bei Medikamenten, Blutprodukten oder Medizinmaterial",
+        "it": "Rottura di approvvigionamento di medicinali, emoderivati o materiale medico",
+    },
+    "complexite_administrative": {
+        "en": "Administrative complexity of the required procedures",
+        "de": "Administrative Komplexität der erforderlichen Schritte",
+        "it": "Complessità amministrativa delle pratiche da svolgere",
+    },
     # Informationnels
     "information_indisponible": {
         "en": "No information available on treatment options",
