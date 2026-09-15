@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block titre %}Modération - BeeHeard{% endblock %}
+
+{% block contenu %}
+<div class="entete-admin">
+  <h1>Modération des témoignages</h1>
+  <form method="post" action="/administration/deconnexion">
+    <button type="submit" class="bouton-discret">Se déconnecter</button>
+  </form>
+</div>
+
+<div class="indicateurs">
+  <div class="indicateur">
+    <span class="valeur">{{ comptes.soumis }}</span>
+    <span class="libelle">en attente</span>
+  </div>
+  <div class="indicateur">
+    <span class="valeur">{{ comptes.valide }}</span>
+    <span class="libelle">validés</span>
+  </div>
+  <div class="indicateur">
+    <span class="valeur">{{ comptes.publie }}</span>
+    <span class="libelle">publiés</span>
+  </div>
+  <div class="indicateur">
+    <span class="valeur">{{ comptes.rejete }}</span>
+    <span class="libelle">rejetés</span>
+  </div>
+</div>
+
+<div class="barre-filtres">
+  <div class="filtre">
+    <label for="filtre-statut">Statut</label>
+    <form method="get" action="/administration">
+      <select name="statut" id="filtre-statut" onchange="this.form.submit()">
+        <option value="">Tous les statuts</option>
+        {% for code, libelle in libelles_statuts.items() %}
+        <option value="{{ code }}"
+                {% if code == statut_actif %}selected{% endif %}>
+          {{ libelle }}
+        </option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
+</div>
+
+{% if temoignages %}
+<table class="table-admin">
+  <thead>
+    <tr>
+      <th>Référence</th>
+      <th>Titre</th>
+      <th>Qualité</th>
+      <th>Obstacles</th>
+      <th>Déposé le</th>
+      <th>Statut</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for temoignage in temoignages %}
+    <tr>
+      <td><code>{{ temoignage.contributeur.pseudonyme }}</code></td>
+      <td>{{ temoignage.titre | truncate(60) }}</td>
+      <td class="discret">{{ temoignage.contributeur.role | capitalize }}</td>
+      <td>{{ temoignage.obstacles | length }}</td>
+      <td class="discret">
+        {{ temoignage.date_soumission.strftime("%d.%m.%Y") }}
+      </td>
+      <td>
+        <span class="etiquette etiquette-{{ temoignage.statut }}">
+          {{ libelles_statuts[temoignage.statut] }}
+        </span>
+      </td>
+      <td>
+        <a href="/administration/temoignage/{{ temoignage.id }}"
+           class="lien-examiner">Examiner</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="vide">
+  <p>Aucun témoignage ne correspond à ce filtre.</p>
+</div>
+{% endif %}
+{% endblock %}

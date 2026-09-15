@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block titre %}Administration - BeeHeard{% endblock %}
+
+{% block contenu %}
+<div class="acces-conteneur">
+  <h1>Espace de modération</h1>
+  <p class="intro">
+    Cet espace permet d'examiner les témoignages déposés et de décider de leur
+    intégration aux données agrégées.
+  </p>
+
+  {% if erreur %}
+  <div class="alerte">{{ erreur }}</div>
+  {% endif %}
+
+  <form method="post" action="/administration/connexion" class="formulaire-court">
+    <label for="mot_de_passe">Mot de passe</label>
+    <input type="password" name="mot_de_passe" id="mot_de_passe" required
+           autocomplete="current-password">
+    <button type="submit">Accéder</button>
+  </form>
+
+  <div class="encart-note">
+    <p>
+      L'accès repose sur un secret partagé. Une exploitation réelle supposerait
+      une authentification nominative et une traçabilité des décisions de
+      modération.
+    </p>
+  </div>
+</div>
+{% endblock %}

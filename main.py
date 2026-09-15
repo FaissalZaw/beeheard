@@ -10,6 +10,7 @@ from app.base_donnees import creer_tables
 from app.config import NOM_APPLICATION, RACINE, VERSION
 from app.routes import (
     routes_acces,
+    routes_administration,
     routes_accueil,
     routes_collecte,
     routes_export,
@@ -44,6 +45,7 @@ app.include_router(routes_tableau_bord.routeur)
 app.include_router(routes_collecte.routeur)
 app.include_router(routes_export.routeur)
 app.include_router(routes_acces.routeur)
+app.include_router(routes_administration.routeur)
 
 
 @app.get("/sante", tags=["technique"])

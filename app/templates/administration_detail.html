@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block titre %}Examen du témoignage - BeeHeard{% endblock %}
+
+{% block contenu %}
+<p class="fil-ariane">
+  <a href="/administration">Retour à la liste</a>
+</p>
+
+<div class="entete-admin">
+  <h1>{{ temoignage.titre }}</h1>
+  <span class="etiquette etiquette-{{ temoignage.statut }}">
+    {{ libelles_statuts[temoignage.statut] }}
+  </span>
+</div>
+
+<section class="fiche">
+  <div class="meta-temoignage">
+    <div><span class="meta-etiquette">Référence</span>
+      <code>{{ temoignage.contributeur.pseudonyme }}</code></div>
+    <div><span class="meta-etiquette">Qualité</span>
+      {{ temoignage.contributeur.role | capitalize }}</div>
+    <div><span class="meta-etiquette">Pathologie</span>
+      {{ temoignage.maladie.nom }}</div>
+    <div><span class="meta-etiquette">Canton</span>
+      {{ temoignage.contributeur.region or "non conservé" }}</div>
+    <div><span class="meta-etiquette">Tranche d'âge</span>
+      {{ temoignage.contributeur.tranche_age or "non conservée" }}</div>
+    <div><span class="meta-etiquette">Déposé le</span>
+      {{ temoignage.date_soumission.strftime("%d.%m.%Y à %H:%M") }}</div>
+  </div>
+
+  <h2>Récit</h2>
+  <p>{{ temoignage.recit }}</p>
+
+  <h2>Obstacles signalés</h2>
+  <ul>
+    {% for obstacle in temoignage.obstacles %}
+    <li>
+      {{ obstacle.type_obstacle.libelle_dans(langue_courante) }}
+      <span class="discret">
+        (gravité {{ obstacle.severite }}/5{% if obstacle.duree_jours %},
+        {{ obstacle.duree_jours }} jours{% endif %})
+      </span>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Consentements</h2>
+  <ul class="liste-consentements">
+    <li>
+      Anonymisation :
+      <strong>{{ temoignage.consentement.niveau_anonymisation }}</strong>
+    </li>
+    <li>
+      Publication :
+      <strong>
+        {% if temoignage.consentement.autorise_publication %}autorisée
+        {% else %}non autorisée{% endif %}
+      </strong>
+    </li>
+    <li>
+      Plaidoyer et recherche :
+      <strong>
+        {% if temoignage.consentement.autorise_plaidoyer %}autorisé
+        {% else %}non autorisé{% endif %}
+      </strong>
+    </li>
+    <li class="discret">
+      Version du texte accepté : {{ temoignage.consentement.version_texte }},
+      le {{ temoignage.consentement.date_consentement.strftime("%d.%m.%Y") }}
+    </li>
+  </ul>
+</section>
+
+<section class="actions-moderation">
+  <h2>Décision</h2>
+  <p class="aide">
+    Les transitions proposées dépendent du statut actuel, conformément au
+    cycle de vie défini pour un témoignage.
+  </p>
+
+  <div class="hero-actions">
+    {% if temoignage.statut == "soumis" %}
+    <form method="post" action="/administration/temoignage/{{ temoignage.id }}/valider">
+      <button type="submit" class="bouton">Valider</button>
+    </form>
+    <form method="post" action="/administration/temoignage/{{ temoignage.id }}/rejeter">
+      <button type="submit" class="bouton-danger">Rejeter</button>
+    </form>
+    {% elif temoignage.statut == "valide" %}
+    <form method="post" action="/administration/temoignage/{{ temoignage.id }}/publier">
+      <button type="submit" class="bouton">Publier</button>
+    </form>
+    <form method="post" action="/administration/temoignage/{{ temoignage.id }}/rejeter">
+      <button type="submit" class="bouton-danger">Rejeter</button>
+    </form>
+    {% else %}
+    <p class="discret">
+      Ce témoignage est dans un état terminal, aucune transition n'est
+      possible.
+    </p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

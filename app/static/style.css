@@ -1076,3 +1076,91 @@ section p {
   display: flex;
   align-items: center;
 }
+
+
+/* Espace d'administration */
+
+.entete-admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.entete-admin h1 { margin: 0; }
+
+.table-admin { font-size: 14px; }
+.table-admin td { vertical-align: middle; }
+.table-admin code { font-size: 13px; }
+
+.etiquette {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.etiquette-soumis { background: #fef3c7; color: #92400e; }
+.etiquette-valide { background: #dbeafe; color: #1e40af; }
+.etiquette-publie { background: #dcfce7; color: #166534; }
+.etiquette-rejete { background: #fee2e2; color: #991b1b; }
+.etiquette-brouillon { background: #f3f4f6; color: #4b5563; }
+
+.lien-examiner {
+  color: var(--accent);
+  font-size: 13.5px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lien-examiner:hover { text-decoration: underline; }
+
+.fil-ariane {
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.fil-ariane a { color: var(--discret); text-decoration: none; }
+.fil-ariane a:hover { color: var(--accent); }
+
+.meta-temoignage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--bord);
+}
+
+.meta-etiquette {
+  display: block;
+  font-size: 12px;
+  color: var(--discret);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 3px;
+}
+
+.liste-consentements { padding-left: 20px; }
+.liste-consentements li { margin-bottom: 6px; }
+
+.actions-moderation {
+  margin-top: 36px;
+  padding: 24px;
+  background: var(--accent-clair);
+  border-radius: 8px;
+}
+
+.actions-moderation h2 { margin-top: 0; }
+.actions-moderation form { display: inline; }
+
+.lien-admin {
+  opacity: 0.45;
+  font-size: 12.5px;
+}
+
+.lien-admin:hover { opacity: 1; }
